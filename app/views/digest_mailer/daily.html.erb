@@ -1,0 +1,12 @@
+<div class="header">
+  <h1><%= @source_list.name %></h1>
+  <p class="light">Here's what's been posted in the past day:</p>
+</div>
+
+<ul>
+  <% @source_list.entries.published_today.each do |entry| %>
+    <%= render partial: 'shared/entry', locals: { entry: entry } %>
+  <% end %>
+</ul>
+
+<p><small>Powered by <strong>Digestif</strong></small></p>
