@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   mount Digestif::MailPreview => 'mail_preview'
 
+  post 'api/source_lists' => 'api/source_lists#create'
+
   get 'digests/:slug' => 'digests#show'
   root to: 'site#show'
 end
