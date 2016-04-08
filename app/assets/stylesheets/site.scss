@@ -1,4 +1,104 @@
+@import 'partials/**/*';
+
+/* ----------------------------------------------------------------- */
+// HTML & Body
+/* ----------------------------------------------------------------- */ 
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+html, body {
+  font-family:  "Neue Haas Grotesk Std Text 55 Roman", "Helvetica Neue", Helvetica, Sans-serif;
+  font-size: 16px;
+
+}
+
+$black: #111;
+@mixin neue-haas-grotesk-text {
+  font-family: 'Neue Haas Grotesk Std Text 55 Roman';
+}
+@mixin neue-haas-grotesk-bold {
+  font-family: 'Neue Haas Grotesk Std Text 75 Bold';
+}
+@mixin neue-haas-grotesk-black {
+  font-family: 'Neue Haas Grotesk Std Display 95 Black';
+}
+
+body {
+  @include neue-haas-grotesk-text;
+  margin: 0;
+  padding: 0;
+}
+
 .container {
-  max-width: 960px;
+  max-width: 600px;
   margin: 0 auto;
+}
+
+body.site {
+  background: $base2;
+  .app {
+    background: $base3;
+    padding: 2em;
+  }
+  h1 {
+    border-top: 0.33em solid $base03;
+    font-weight: normal;
+    padding-top: 0.33em;
+    margin: 2em 0 0em;
+    @include neue-haas-grotesk-black;
+    color: $base03;
+    text-align: left;
+    line-height: 1em;
+    font-size: 3em;
+  }
+  h2 {
+    font-weight: normal;
+    @include neue-haas-grotesk-bold;
+    color: $base01;
+    text-align: left;
+    font-size: 1em;
+    line-height: 1em;
+    margin-bottom: 2em;
+  }
+
+  .create-digest-form {
+    margin: 3em 0;
+    input {
+      @include placeholder {
+        color: $base1;
+      }
+      border-width: 0;
+      text-align: center;
+      background: $base2;
+      width: 100%;
+      padding: 1em;
+      font-size: 1em;
+      box-sizing: border-box;
+      &:focus {
+        outline: none;
+      }
+    }
+    input[type='email'] {
+      margin-bottom: 0.5em;
+    }
+    .composite-text-field {
+      input {
+        margin-bottom: 0.5em;
+      }
+      a {
+        float: right;
+        margin: 0.5em 0;
+      }
+    }
+    input[type='submit'] {
+      margin: 1em 0;
+      padding: 1em;
+      background: $accent2;
+      @include neue-haas-grotesk-bold;
+      color: white;
+    }
+  }
 }

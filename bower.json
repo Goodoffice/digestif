@@ -1,0 +1,11 @@
+{
+  "name": "digestif",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "lodash": "*"
+  }
+}
+

@@ -79,6 +79,7 @@ GEM
       faraday_middleware (~> 0.9)
       loofah (~> 2.0)
       sax-machine (~> 1.0)
+    flutie (2.0.0)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
     globalid (0.3.6)
@@ -223,6 +224,7 @@ DEPENDENCIES
   colorize
   factory_girl_rails
   feedjira
+  flutie
   friendly_id (~> 5.1.0)
   htmlentities
   jbuilder (~> 2.0)

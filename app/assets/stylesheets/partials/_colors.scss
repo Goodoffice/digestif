@@ -1,0 +1,31 @@
+$primary:   #0F4696;
+
+$primary-hue: hue($primary);
+$base-saturation: 3;
+$accent-saturation: 80;
+$accent-lightness: 45;
+
+/*
+ * Lightness values were extracted from:
+ * http://ethanschoonover.com/solarized
+ */
+
+$base03:   black;
+$base02:   black;
+$base01:    hsl($primary-hue, $base-saturation, 45);
+$base00:    hsl($primary-hue, $base-saturation, 50);
+$base0:    hsl($primary-hue, $base-saturation, 60);
+$base1:    hsl($primary-hue, $base-saturation, 75);
+$base2:    hsl(255 - $primary-hue, $base-saturation, 95);
+$base3:    white;
+
+$accent03:    hsl($primary-hue + 45, $accent-saturation, $accent-lightness);
+$accent02:    hsl($primary-hue + 90, $accent-saturation, $accent-lightness);
+$accent01:    hsl($primary-hue + 135, $accent-saturation, $accent-lightness);
+$accent00:    hsl($primary-hue + 180, $accent-saturation, $accent-lightness);
+$accent0:    hsl($primary-hue + 215, $accent-saturation, $accent-lightness);
+$accent1:    hsl($primary-hue + 270, $accent-saturation, $accent-lightness);
+$accent2:    hsl($primary-hue - 315, $accent-saturation, $accent-lightness);
+$accent3:    hsl($primary-hue - 360, $accent-saturation, $accent-lightness);
+
+
