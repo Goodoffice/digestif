@@ -9,14 +9,29 @@
 
   renderTextFields: ->
     name        = @props.name
-    placeholder = @props.placeholder
+    handler     = @handleKeyDown
 
-    _.map _.range(0, @state.field_count), (i) ->
-      `<input key={i} type='text' placeholder={placeholder} name={name} />`
+    _.map _.range(0, @state.field_count), (i) =>
+      placeholder = if i == 0 then @props.initialPlaceholder else @props.placeholder
+      `<input onKeyDown={handler} key={i} type='text' placeholder={placeholder} name={name} />`
+
+  element: ->
+    ReactDOM.findDOMNode(this)
+
+  mapChildren: (iteratee) ->
+    _.map @element().childNodes, iteratee
+
+  getValues: ->
+    @mapChildren (input) -> input.value
+
+  isFull: ->
+    _.every @getValues()
+
+  handleKeyDown: (event) ->
+    if @isFull()
+      @addTextField()
 
   render: ->
     `<div className='composite-text-field'>
       {this.renderTextFields()}
-
-      <a href='#' onClick={this.addTextField} >Add Another</a>
     </div>`
