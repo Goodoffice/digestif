@@ -1,8 +1,10 @@
+@import 'base';
 @import 'partials/**/*';
 
 /* ----------------------------------------------------------------- */
 // HTML & Body
 /* ----------------------------------------------------------------- */ 
+
 html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: subpixel-antialiased;
@@ -13,17 +15,6 @@ html, body {
   font-family:  "Neue Haas Grotesk Std Text 55 Roman", "Helvetica Neue", Helvetica, Sans-serif;
   font-size: 16px;
 
-}
-
-$black: #111;
-@mixin neue-haas-grotesk-text {
-  font-family: 'Neue Haas Grotesk Std Text 55 Roman';
-}
-@mixin neue-haas-grotesk-bold {
-  font-family: 'Neue Haas Grotesk Std Text 75 Bold';
-}
-@mixin neue-haas-grotesk-black {
-  font-family: 'Neue Haas Grotesk Std Display 95 Black';
 }
 
 body {
@@ -37,68 +28,123 @@ body {
   margin: 0 auto;
 }
 
-body.site {
-  background: $base2;
-  .app {
-    background: $base3;
-    padding: 2em;
-  }
-  h1 {
-    border-top: 0.33em solid $base03;
-    font-weight: normal;
-    padding-top: 0.33em;
-    margin: 2em 0 0em;
-    @include neue-haas-grotesk-black;
-    color: $base03;
-    text-align: left;
-    line-height: 1em;
-    font-size: 3em;
-  }
-  h2 {
-    font-weight: normal;
+.app {
+  background: $base3;
+  padding: 2em;
+}
+
+/* ----------------------------------------------------------------- */
+// Headers
+/* ----------------------------------------------------------------- */
+
+h1 {
+  border-top: 0.33em solid $base03;
+  font-weight: normal;
+  padding-top: 0.33em;
+  margin: 2em 0 0em;
+  @include neue-haas-grotesk-black;
+  color: $base03;
+  text-align: left;
+  line-height: 1em;
+  font-size: 3em;
+}
+
+h2 {
+  font-weight: normal;
+  @include neue-haas-grotesk-bold;
+  color: $base01;
+  text-align: left;
+  font-size: 1em;
+  line-height: 1em;
+  margin-bottom: 2em;
+}
+
+/* ----------------------------------------------------------------- */
+// Forms
+/* ----------------------------------------------------------------- */
+
+.button-group {
+  margin: 2em 0;
+}
+
+.create-digest-form {
+  margin: 3em 0;
+  input {
     @include neue-haas-grotesk-bold;
-    color: $base01;
+    @include placeholder {
+      color: $base02;
+      @include neue-haas-grotesk-bold;
+    }
+    border-width: 0;
     text-align: left;
+    background: $base2;
+    width: 100%;
+    padding: 1em;
     font-size: 1em;
-    line-height: 1em;
+    box-sizing: border-box;
+  }
+  input[type='email'],
+  input[type='text'] {
+    margin-top: -0.5em;
+    margin-left: -0.5em;
+    @include box-shadow(0.5em 0.5em 0 $base1);
+    background: $base2;
+    &:hover {
+      outline: none;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  input[type='email'] {
     margin-bottom: 2em;
   }
-
-  .create-digest-form {
-    margin: 3em 0;
+  .composite-text-field {
+    margin-top: 2em;
     input {
-      @include placeholder {
-        color: $base1;
-      }
-      border-width: 0;
-      text-align: center;
-      background: $base2;
-      width: 100%;
-      padding: 1em;
-      font-size: 1em;
-      box-sizing: border-box;
-      &:focus {
-        outline: none;
-      }
+      margin-bottom: 2em;
     }
-    input[type='email'] {
-      margin-bottom: 0.5em;
+    a {
+      float: right;
+      margin: 0.5em 0;
     }
-    .composite-text-field {
-      input {
-        margin-bottom: 0.5em;
-      }
-      a {
-        float: right;
-        margin: 0.5em 0;
-      }
+  }
+  input[type='submit'] {
+    margin-top: -0.5em;
+    margin-left: -0.5em;
+    padding: 1em;
+    @include box-shadow(0.5em 0.5em 0 lighten($accent2, 25%));
+    background: $accent2;
+    @include neue-haas-grotesk-bold;
+    color: white;
+    text-align: right;
+    &:focus {
+      outline: none;
     }
-    input[type='submit'] {
-      margin: 1em 0;
-      padding: 1em;
-      background: $accent2;
-      @include neue-haas-grotesk-bold;
-      color: white;
+    &:active {
+      margin-top: 0;
+      margin-left: 0;
+      outline: none;
+      @include box-shadow(0 0 0);
     }
   }
 }
+
+/* ----------------------------------------------------------------- */
+// About Footer
+/* ----------------------------------------------------------------- */
+
+.about {
+  .guilded-logo {
+    @include background(image-url('guilded-logo.png') top center no-repeat);
+    width: 32px;
+    height: 32px;
+    @include background-size(100%);
+    float: left;
+    margin-right: 0.5em;
+  }
+  a { color: $accent01; }
+  line-height: 32px;
+  @include neue-haas-grotesk-bold;
+}
+

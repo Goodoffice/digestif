@@ -11,12 +11,17 @@
 // about supported directives.
 //
 //= require lodash/lodash
+//= require alt/dist/alt
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require react
 //= require react_ujs
 //= require ReactRouter.min
+//
+//= require init
+//= require actions/source_list_actions
+//= require stores/source_list_store
 //= require components
 //= require router
 //= require_tree .

@@ -47,3 +47,13 @@
   
 @font-face {font-family: 'Neue Haas Grotesk Std Text 75 Bold';src: url('/assets/neue-haas-grotesk/2F0FA1_3_0.eot');src: url('/assets/neue-haas-grotesk/2F0FA1_3_0.eot?#iefix') format('embedded-opentype'),url('/assets/neue-haas-grotesk/2F0FA1_3_0.woff2') format('woff2'),url('/assets/neue-haas-grotesk/2F0FA1_3_0.woff') format('woff'),url('/assets/neue-haas-grotesk/2F0FA1_3_0.ttf') format('truetype');}
  
+@mixin neue-haas-grotesk-text {
+  font-family: 'Neue Haas Grotesk Std Text 55 Roman';
+}
+@mixin neue-haas-grotesk-bold {
+  font-family: 'Neue Haas Grotesk Std Text 75 Bold';
+}
+@mixin neue-haas-grotesk-black {
+  font-family: 'Neue Haas Grotesk Std Display 95 Black';
+}
+

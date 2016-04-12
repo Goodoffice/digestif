@@ -11,7 +11,7 @@ class SourceList < ActiveRecord::Base
   end
 
   def source_urls=(source_urls)
-    source_urls.each do |url|
+    source_urls.reject(&:blank?).each do |url|
       sources.build(url: url)
     end
   end
