@@ -2,14 +2,16 @@ class SourceListStore
   @displayName: 'SourceListStore'
 
   constructor: ->
-    @bindActions(SourceListActions)
+    @bindListeners
+      onCreateSourceList: SourceListActions.CREATE_SOURCE_LIST
+      onCreateSourceListComplete: SourceListActions.CREATE_SOURCE_LIST_COMPLETE
 
-  onCreateSourceList: (data) ->
-    request = new XMLHttpRequest()
-    request.open 'POST', '/api/source_lists', true
-    request.setRequestHeader 'Content-Type', 'application/json'
-    request.send JSON.stringify(source_list: data)
+  onCreateSourceList: ->
 
+  onCreateSourceListComplete: (response) ->
+    if response.errors
+      @errors = response.errors
+      @emitChange()
 
 window.SourceListStore = alt.createStore(SourceListStore, 'SourceListStore')
 

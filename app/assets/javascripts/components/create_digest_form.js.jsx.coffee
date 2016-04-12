@@ -13,10 +13,12 @@
 
   handleSubmit: (event) ->
     event.preventDefault()
-    SourceListActions.createSourceList
+    SourceListActions.createSourceList(
       name: @refs.name.value
       author_attributes:
         email: @refs.email.value
       source_urls: @refs.sourceUrls.getValues()
+    )
+      
     return false
 

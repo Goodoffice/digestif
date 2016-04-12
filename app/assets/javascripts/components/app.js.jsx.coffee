@@ -1,7 +1,7 @@
 @App = React.createClass
 
   componentWillMount: ->
-    @
+    SourceListStore.listen(@onChange)
 
   componentDidUpdate: ->
     @
@@ -12,12 +12,25 @@
   onChange: (state) ->
     @setState(state)
 
+  getInitialState: ->
+    {
+      errors: []
+    }
+
+  getErrorMessage: ->
+    if @state.errors?.name
+      "Oops! There was a problem."
+
   render: ->
     `<div className='app'>
       <h1>RSS to your inbox every&nbsp;morning.</h1>
       <h2>Digestif sends you an email digest of your RSS&nbsp;feeds.</h2>
 
-      <CreateDigestForm />
+      <CreateDigestForm onSubmit={this.handleSubmitForm} />
+
+      <div className='errors'>
+        {this.getErrorMessage()}
+      </div>
 
       <div className='about'>
         <a className='guilded-logo' href='http://www.guilded.co'></a>
@@ -25,3 +38,5 @@
       </div>
      </div>`
 
+  handleSubmitForm: (errors) ->
+    console.log(errors)
