@@ -36,16 +36,16 @@
 @import url("//hello.myfonts.net/count/2f0fa1");
 
   
-@font-face {font-family: 'Neue Haas Grotesk Std Text 55 Italic';src: url('/assets/neue-haas-grotesk/2F0FA1_0_0.eot');src: url('/assets/neue-haas-grotesk/2F0FA1_0_0.eot?#iefix') format('embedded-opentype'),url('/assets/neue-haas-grotesk/2F0FA1_0_0.woff2') format('woff2'),url('/assets/neue-haas-grotesk/2F0FA1_0_0.woff') format('woff'),url('/assets/neue-haas-grotesk/2F0FA1_0_0.ttf') format('truetype');}
+@font-face {font-family: 'Neue Haas Grotesk Std Text 55 Italic';src: font-url('neue-haas-grotesk/2F0FA1_0_0.eot');src: font-url('neue-haas-grotesk/2F0FA1_0_0.eot?#iefix') format('embedded-opentype'),font-url('neue-haas-grotesk/2F0FA1_0_0.woff2') format('woff2'),font-url('neue-haas-grotesk/2F0FA1_0_0.woff') format('woff'),font-url('neue-haas-grotesk/2F0FA1_0_0.ttf') format('truetype');}
  
   
-@font-face {font-family: 'Neue Haas Grotesk Std Text 55 Roman';src: url('/assets/neue-haas-grotesk/2F0FA1_1_0.eot');src: url('/assets/neue-haas-grotesk/2F0FA1_1_0.eot?#iefix') format('embedded-opentype'),url('/assets/neue-haas-grotesk/2F0FA1_1_0.woff2') format('woff2'),url('/assets/neue-haas-grotesk/2F0FA1_1_0.woff') format('woff'),url('/assets/neue-haas-grotesk/2F0FA1_1_0.ttf') format('truetype');}
+@font-face {font-family: 'Neue Haas Grotesk Std Text 55 Roman';src: font-url('neue-haas-grotesk/2F0FA1_1_0.eot');src: font-url('neue-haas-grotesk/2F0FA1_1_0.eot?#iefix') format('embedded-opentype'),font-url('neue-haas-grotesk/2F0FA1_1_0.woff2') format('woff2'),font-url('neue-haas-grotesk/2F0FA1_1_0.woff') format('woff'),font-url('neue-haas-grotesk/2F0FA1_1_0.ttf') format('truetype');}
  
   
-@font-face {font-family: 'Neue Haas Grotesk Std Display 95 Black';src: url('/assets/neue-haas-grotesk/2F0FA1_2_0.eot');src: url('/assets/neue-haas-grotesk/2F0FA1_2_0.eot?#iefix') format('embedded-opentype'),url('/assets/neue-haas-grotesk/2F0FA1_2_0.woff2') format('woff2'),url('/assets/neue-haas-grotesk/2F0FA1_2_0.woff') format('woff'),url('/assets/neue-haas-grotesk/2F0FA1_2_0.ttf') format('truetype');}
+@font-face {font-family: 'Neue Haas Grotesk Std Display 95 Black';src: font-url('neue-haas-grotesk/2F0FA1_2_0.eot');src: font-url('neue-haas-grotesk/2F0FA1_2_0.eot?#iefix') format('embedded-opentype'),font-url('neue-haas-grotesk/2F0FA1_2_0.woff2') format('woff2'),font-url('neue-haas-grotesk/2F0FA1_2_0.woff') format('woff'),font-url('neue-haas-grotesk/2F0FA1_2_0.ttf') format('truetype');}
  
   
-@font-face {font-family: 'Neue Haas Grotesk Std Text 75 Bold';src: url('/assets/neue-haas-grotesk/2F0FA1_3_0.eot');src: url('/assets/neue-haas-grotesk/2F0FA1_3_0.eot?#iefix') format('embedded-opentype'),url('/assets/neue-haas-grotesk/2F0FA1_3_0.woff2') format('woff2'),url('/assets/neue-haas-grotesk/2F0FA1_3_0.woff') format('woff'),url('/assets/neue-haas-grotesk/2F0FA1_3_0.ttf') format('truetype');}
+@font-face {font-family: 'Neue Haas Grotesk Std Text 75 Bold';src: font-url('neue-haas-grotesk/2F0FA1_3_0.eot');src: font-url('neue-haas-grotesk/2F0FA1_3_0.eot?#iefix') format('embedded-opentype'),font-url('neue-haas-grotesk/2F0FA1_3_0.woff2') format('woff2'),font-url('neue-haas-grotesk/2F0FA1_3_0.woff') format('woff'),font-url('neue-haas-grotesk/2F0FA1_3_0.ttf') format('truetype');}
  
 @mixin neue-haas-grotesk-text {
   font-family: 'Neue Haas Grotesk Std Text 55 Roman';
