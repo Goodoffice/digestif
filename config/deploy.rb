@@ -1,4 +1,3 @@
-require "whenever/capistrano"
 
 lock '3.4.1'
 set :application, 'digestif'
