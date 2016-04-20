@@ -13,7 +13,7 @@ $accent-lightness: 45;
  */
 
 $base03:   black;
-$base02:   black;
+$base02:    hsl($primary-hue, $base-saturation, 30);
 $base01:    hsl($primary-hue, $base-saturation, 45);
 $base00:    hsl($primary-hue, $base-saturation, 50);
 $base0:    hsl($primary-hue, $base-saturation, 60);

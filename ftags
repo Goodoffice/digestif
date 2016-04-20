@@ -69,8 +69,8 @@ README.md	./vendor/assets/components/lodash/doc/README.md	/^/;"	r
 Rakefile	./Rakefile	/^/;"	r
 Rakefile	./vendor/assets/components/alt/web/Rakefile	/^/;"	r
 ReactRouter.min.js	./vendor/assets/javascripts/ReactRouter.min.js	/^/;"	r
+_base.scss	./app/assets/stylesheets/_base.scss	/^/;"	r
 _baseConvert.js	./vendor/assets/components/lodash/fp/_baseConvert.js	/^/;"	r
-_colors.scss	./app/assets/stylesheets/partials/_colors.scss	/^/;"	r
 _config.yml	./vendor/assets/components/alt/web/_config.yml	/^/;"	r
 _convertBrowser.js	./vendor/assets/components/lodash/fp/_convertBrowser.js	/^/;"	r
 _entry.html.erb	./app/views/shared/_entry.html.erb	/^/;"	r
