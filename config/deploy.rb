@@ -14,3 +14,17 @@ namespace :deploy do
   end
 
 end
+
+namespace :digestif do
+
+  task :mail do
+    on roles(:all) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'digestif:mail'
+        end
+      end
+    end
+  end
+
+end
