@@ -22,8 +22,12 @@ gem 'htmlentities'
 gem 'react-rails', '~> 1.6.0'
 gem 'friendly_id', '~> 5.1.0' 
 gem 'active_model_serializers'
-
 gem 'flutie'
+
+gem 'capistrano', '~> 3.1'
+gem 'capistrano-bundler', '~> 1.1.2'
+gem 'capistrano-rvm'
+gem 'capistrano-passenger'
 
 group :development, :test do
   gem 'byebug'
