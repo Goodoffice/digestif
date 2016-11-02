@@ -19,8 +19,7 @@ gem 'colorize'
 gem 'feedjira'
 gem 'whenever', require: false
 gem 'htmlentities'
-gem 'react-rails', '~> 1.6.0'
-gem 'friendly_id', '~> 5.1.0' 
+gem 'friendly_id', '~> 5.1.0'
 gem 'active_model_serializers'
 gem 'flutie'
 
