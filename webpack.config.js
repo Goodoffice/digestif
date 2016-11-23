@@ -95,7 +95,9 @@ module.exports = {
     fs: 'empty'
   },
   resolve: {
-    alias: {
-    }
-  },
+    root: [
+      __dirname + '/assets/javascripts',
+      __dirname + '/assets/stylesheets'
+    ]
+  }
 }

@@ -9,6 +9,7 @@ class Source < ActiveRecord::Base
   has_many :entries, -> { order('published_at DESC') }
 
   before_validation :assign_name, on: :create
+  before_create :ingest_favicon
   before_create :ingest_entries
 
   def ingest_entries
