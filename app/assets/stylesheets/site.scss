@@ -23,6 +23,7 @@ body {
   padding: 0;
 }
 
+
 .container {
   max-width: 640px;
   margin:  120px auto;
@@ -42,7 +43,7 @@ body {
 /* ----------------------------------------------------------------- */
 
 h1 {
-  border-top: 0.33em solid $base03;
+  border-top: 8px solid $base03;
   font-weight: normal;
   padding-top: 0.33em;
   margin: 2em 0 0em;
@@ -161,3 +162,18 @@ h2 {
   @include neue-haas-grotesk-bold;
 }
 
+
+.footer {
+  margin: 2em auto;
+  a {
+    color: $accent01;
+    text-decoration: none;
+  }
+  background: $base3;
+  margin-top: 4em;
+  padding: 0.5em 0;
+  padding-bottom: 3em;
+  margin-bottom: 1em;
+  font-family: 'Neue Haas Grotesk Std Text 75 Bold';
+  border-top: 0.25em solid $base03;
+}

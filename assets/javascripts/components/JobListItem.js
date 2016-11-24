@@ -3,14 +3,27 @@ import moment from 'moment';
 import Avatar from 'material-ui/Avatar';
 import {ListItem} from 'material-ui/List';
 import {capitalize} from 'lodash';
+import Chip from 'material-ui/Chip';
+
+import { blue500, red500, green500, purple500, yellow500, black, white } from 'material-ui/styles/colors';
+
+const THEMES = [
+    { backgroundColor: blue500, color: white },
+    { backgroundColor: red500, color: white },
+    { backgroundColor: green500, color: white },
+    { backgroundColor: purple500, color: white },
+    { backgroundColor: yellow500, color: black }
+];
 
 export default class extends React.Component {
     render() {
         return (
-            <ListItem
-                leftAvatar={this.getAvatar()}
-                primaryText={this.props.job.get('title')}
-                secondaryText={this.getSecondaryText()} />
+            <a style={{textDecoration: 'none'}} href={this.props.job.get('url')} target="_blank">
+                <ListItem
+                    leftAvatar={this.getAvatar()}
+                    primaryText={this.props.job.get('title')}
+                    secondaryText={this.getSecondaryText()} />
+            </a>
         );
     }
 
@@ -23,7 +36,8 @@ export default class extends React.Component {
             return (<Avatar backgroundColor='#ffffff' src={this.props.job.get('favicon_url')} />);
         }
         else {
-            return (<Avatar backgroundColor='#ffffff' color='#000'>{this.getAvatarLetter()}</Avatar>);
+            const themeIndex = this.props.job.get('source_id') % THEMES.length;
+            return (<Avatar {...THEMES[themeIndex]}>{this.getAvatarLetter()}</Avatar>);
         }
     }
 
@@ -32,6 +46,8 @@ export default class extends React.Component {
     }
 
     getSecondaryText() {
-        return moment(this.props.job.get('published_at')).fromNow() + " on " + this.props.job.get('source_name');
+        return (
+            moment(this.props.job.get('published_at')).fromNow() + " on " + this.props.job.get('source_name')
+        );
     }
 }

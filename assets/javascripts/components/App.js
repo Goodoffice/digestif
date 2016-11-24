@@ -13,6 +13,10 @@ export default class extends React.Component {
                 <h1>Hacker Jobs</h1>
 
                 <JobList jobs={this.props.jobs} />
+
+                <div className="footer">
+                    Made by <a href="http://www.guilded.co">Guilded</a>
+                </div>
             </div>
         );
     }
