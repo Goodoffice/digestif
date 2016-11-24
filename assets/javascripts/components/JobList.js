@@ -1,8 +1,7 @@
 import React from 'react';
-import {List, ListItem} from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
+import {List} from 'material-ui/List';
 import CircularProgress from 'material-ui/CircularProgress';
-import moment from 'moment';
+import JobListItem from './JobListItem';
 
 export default class extends React.Component {
     render() {
@@ -24,11 +23,9 @@ export default class extends React.Component {
 
     renderItems() {
         return this.props.jobs.get('results').map(entry => (
-            <ListItem
-                leftAvatar={<Avatar src={entry.get('favicon_url')} />}
-                key={entry.get('guid')}
-                primaryText={entry.get('title')}
-                secondaryText={moment(entry.get('published_at')).fromNow()} />
+            <JobListItem
+                key={entry.get('id')}
+                job={entry} />
         ));
     }
 }

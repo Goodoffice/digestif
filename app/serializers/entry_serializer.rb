@@ -1,5 +1,5 @@
 class EntrySerializer < ActiveModel::Serializer
-    attributes :title, :published_at, :favicon_url
+    attributes :id, :title, :published_at, :favicon_url, :url
 
     def favicon_url
         object.source.favicon_url
