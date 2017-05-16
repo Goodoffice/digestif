@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'digests/:slug' => 'digests#show'
 
   get 'api/jobs' => 'api/jobs#index'
+  get 'api/sources' => 'api/sources#index'
+  post 'api/sources' => 'api/sources#create'
 
 
 

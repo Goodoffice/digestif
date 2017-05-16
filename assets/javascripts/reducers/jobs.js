@@ -15,7 +15,7 @@ export default function(state=initialState, action) {
         case FETCH_JOBS.SUCCESS:
             return state
                 .set('loading', false)
-                .set('results', fromJS(action.payload.jobs));
+                .set('results', fromJS(action.payload));
         case FETCH_JOBS.FAILURE:
             return state
                 .set('loading', false)

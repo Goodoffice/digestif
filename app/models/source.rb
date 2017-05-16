@@ -9,7 +9,6 @@ class Source < ActiveRecord::Base
   has_many :entries, -> { order('published_at DESC') }
 
   before_validation :assign_name, on: :create
-  before_create :ingest_favicon
   before_create :ingest_entries
 
   def ingest_entries
@@ -45,7 +44,7 @@ class Source < ActiveRecord::Base
   end
 
   def assign_name
-    return if self.url.blank?
+    return if self.url.blank? || self.name.present?
 
     open_rss do |rss|
       self.name = rss.title

@@ -1,22 +1,21 @@
 import React from 'react';
 import JobList from './JobList';
+import AppDrawer from './AppDrawer';
 
 export default class extends React.Component {
     constructor(props) {
         super(props);
+        this.props.fetchSources();
         this.props.fetchJobs();
     }
     render() {
-        console.log(this.props.jobs.toJS());
         return (
             <div>
-                <h1>Hacker Jobs</h1>
-
+                <AppDrawer
+                  openAddSourceDialog={this.props.openAddSourceDialog}
+                  createSource={this.props.createSource}
+                  sources={this.props.sources} />
                 <JobList jobs={this.props.jobs} />
-
-                <div className="footer">
-                    Made by <a href="http://www.guilded.co">Guilded</a>
-                </div>
             </div>
         );
     }

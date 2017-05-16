@@ -25,8 +25,8 @@ body {
 
 
 .container {
-  max-width: 640px;
-  margin:  120px auto;
+  margin-left: 400px;
+  padding: 1em;
 }
 
 .brand {
@@ -59,9 +59,9 @@ h2 {
   @include neue-haas-grotesk-bold;
   color: $base01;
   text-align: left;
-  font-size: 1em;
+  font-size: 2em;
+  padding: 0.5em;
   line-height: 1em;
-  margin-bottom: 2em;
 }
 
 /* ----------------------------------------------------------------- */
@@ -141,39 +141,7 @@ h2 {
   }
 }
 
-/* ----------------------------------------------------------------- */
-// About Footer
-/* ----------------------------------------------------------------- */
 
-.about {
-  .guilded-logo {
-    @include background(image-url('guilded-logo.png') top center no-repeat);
-    width: 32px;
-    height: 32px;
-    @include background-size(100%);
-    float: left;
-    margin-right: 0.5em;
-  }
-  color: $base01;
-  text-align: right;
-  font-weight: normal;
-  a { color: $accent01; }
-  line-height: 32px;
-  @include neue-haas-grotesk-bold;
-}
+.job-list {
 
-
-.footer {
-  margin: 2em auto;
-  a {
-    color: $accent01;
-    text-decoration: none;
-  }
-  background: $base3;
-  margin-top: 4em;
-  padding: 0.5em 0;
-  padding-bottom: 3em;
-  margin-bottom: 1em;
-  font-family: 'Neue Haas Grotesk Std Text 75 Bold';
-  border-top: 0.25em solid $base03;
 }

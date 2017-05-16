@@ -20,7 +20,6 @@ export default class extends React.Component {
         return (
             <a style={{textDecoration: 'none'}} href={this.props.job.get('url')} target="_blank">
                 <ListItem
-                    leftAvatar={this.getAvatar()}
                     primaryText={this.props.job.get('title')}
                     secondaryText={this.getSecondaryText()} />
             </a>
