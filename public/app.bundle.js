@@ -39685,9 +39685,19 @@
 	
 	var _fetchSources3 = _interopRequireDefault(_fetchSources2);
 	
+	var _fetchSavedSearches2 = __webpack_require__(/*! actions/fetchSavedSearches */ 995);
+	
+	var _fetchSavedSearches3 = _interopRequireDefault(_fetchSavedSearches2);
+	
 	var _createSource2 = __webpack_require__(/*! actions/createSource */ 987);
 	
 	var _createSource3 = _interopRequireDefault(_createSource2);
+	
+	var _createSavedSearch2 = __webpack_require__(/*! actions/createSavedSearch */ 994);
+	
+	var _createSavedSearch3 = _interopRequireDefault(_createSavedSearch2);
+	
+	var _ui = __webpack_require__(/*! actions/ui */ 991);
 	
 	var _App = __webpack_require__(/*! components/App */ 761);
 	
@@ -39698,7 +39708,9 @@
 	var mapStateToProps = exports.mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return {
 	    sources: state.get('sources'),
-	    jobs: state.get('jobs')
+	    savedSearches: state.get('savedSearches'),
+	    jobs: state.get('jobs'),
+	    ui: state.get('ui')
 	  };
 	};
 	
@@ -39707,11 +39719,23 @@
 	    fetchSources: function fetchSources() {
 	      return dispatch((0, _fetchSources3.default)());
 	    },
-	    fetchJobs: function fetchJobs() {
-	      return dispatch((0, _fetchJobs3.default)());
+	    fetchJobs: function fetchJobs(params) {
+	      return dispatch((0, _fetchJobs3.default)(params));
+	    },
+	    fetchSavedSearches: function fetchSavedSearches(params) {
+	      return dispatch((0, _fetchSavedSearches3.default)(params));
 	    },
 	    createSource: function createSource(attributes) {
 	      return dispatch((0, _createSource3.default)(attributes));
+	    },
+	    createSavedSearch: function createSavedSearch(attributes) {
+	      return dispatch((0, _createSavedSearch3.default)(attributes));
+	    },
+	    openAddSavedSearchDialog: function openAddSavedSearchDialog() {
+	      return dispatch((0, _ui.openAddSavedSearchDialog)());
+	    },
+	    closeAddSavedSearchDialog: function closeAddSavedSearchDialog() {
+	      return dispatch((0, _ui.closeAddSavedSearchDialog)());
 	    }
 	  };
 	};
@@ -41665,10 +41689,12 @@
 	  value: true
 	});
 	
-	exports.default = function () {
+	exports.default = function (params) {
 	  return _defineProperty({}, _reduxApiMiddleware.CALL_API, {
 	    endpoint: "/api/jobs",
 	    method: 'GET',
+	    headers: { 'Content-Type': 'application/json' },
+	    body: JSON.stringify(params),
 	    types: [{
 	      type: _types.FETCH_JOBS.REQUEST
 	    }, {
@@ -46359,7 +46385,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.CREATE_SOURCE = exports.FETCH_SOURCES = exports.FETCH_JOBS = undefined;
+	exports.CLOSE_ADD_SAVED_SEARCH_DIALOG = exports.OPEN_ADD_SAVED_SEARCH_DIALOG = exports.CREATE_SAVED_SEARCH = exports.FETCH_SAVED_SEARCHES = exports.CREATE_SOURCE = exports.FETCH_SOURCES = exports.FETCH_JOBS = undefined;
 	
 	var _es6Enum = __webpack_require__(/*! es6-enum */ 759);
 	
@@ -46374,6 +46400,11 @@
 	var FETCH_JOBS = exports.FETCH_JOBS = ApiActionTypesEnum();
 	var FETCH_SOURCES = exports.FETCH_SOURCES = ApiActionTypesEnum();
 	var CREATE_SOURCE = exports.CREATE_SOURCE = ApiActionTypesEnum();
+	var FETCH_SAVED_SEARCHES = exports.FETCH_SAVED_SEARCHES = ApiActionTypesEnum();
+	var CREATE_SAVED_SEARCH = exports.CREATE_SAVED_SEARCH = ApiActionTypesEnum();
+	
+	var OPEN_ADD_SAVED_SEARCH_DIALOG = exports.OPEN_ADD_SAVED_SEARCH_DIALOG = Symbol('OPEN_ADD_SAVED_SEARCH_DIALOG');
+	var CLOSE_ADD_SAVED_SEARCH_DIALOG = exports.CLOSE_ADD_SAVED_SEARCH_DIALOG = Symbol('CLOSE_ADD_SAVED_SEARCH_DIALOG');
 
 /***/ }),
 /* 759 */
@@ -46473,6 +46504,7 @@
 	
 	        _this.props.fetchSources();
 	        _this.props.fetchJobs();
+	        _this.props.fetchSavedSearches();
 	        return _this;
 	    }
 	
@@ -46482,10 +46514,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_AppDrawer2.default, {
-	                    openAddSourceDialog: this.props.openAddSourceDialog,
-	                    createSource: this.props.createSource,
-	                    sources: this.props.sources }),
+	                _react2.default.createElement(_AppDrawer2.default, this.props),
 	                _react2.default.createElement(_JobList2.default, { jobs: this.props.jobs })
 	            );
 	        }
@@ -86278,9 +86307,17 @@
 	
 	var _language2 = _interopRequireDefault(_language);
 	
+	var _search = __webpack_require__(/*! material-ui/svg-icons/action/search */ 989);
+	
+	var _search2 = _interopRequireDefault(_search);
+	
 	var _AddSourceDialog = __webpack_require__(/*! ./AddSourceDialog */ 964);
 	
 	var _AddSourceDialog2 = _interopRequireDefault(_AddSourceDialog);
+	
+	var _AddSavedSearchDialog = __webpack_require__(/*! ./AddSavedSearchDialog */ 992);
+	
+	var _AddSavedSearchDialog2 = _interopRequireDefault(_AddSavedSearchDialog);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -86307,19 +86344,36 @@
 	  _createClass(AppDrawer, [{
 	    key: 'renderSources',
 	    value: function renderSources() {
+	      var _this2 = this;
+	
 	      return this.props.sources.get('results').map(function (source) {
 	        return _react2.default.createElement(
 	          _MenuItem2.default,
 	          {
 	            leftIcon: _react2.default.createElement(_rssFeed2.default, null),
-	            key: source.url },
+	            onTouchTap: _this2.handleTouchTapSource.call(_this2, source),
+	            key: source.get('url') },
 	          source.get('name')
+	        );
+	      });
+	    }
+	  }, {
+	    key: 'renderSavedSearches',
+	    value: function renderSavedSearches() {
+	      return this.props.savedSearches.get('results').map(function (savedSearch) {
+	        return _react2.default.createElement(
+	          _MenuItem2.default,
+	          {
+	            leftIcon: _react2.default.createElement(_search2.default, null) },
+	          savedSearch.get('query')
 	        );
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _context;
+	
 	      return _react2.default.createElement(
 	        _Drawer2.default,
 	        { open: true, width: 400 },
@@ -86339,6 +86393,18 @@
 	          _react2.default.createElement(
 	            _MenuItem2.default,
 	            {
+	              onClick: (_context = this.props).openAddSavedSearchDialog.bind(_context),
+	              leftIcon: _react2.default.createElement(_addCircleOutline2.default, null) },
+	            'Add Saved Search'
+	          ),
+	          this.renderSavedSearches()
+	        ),
+	        _react2.default.createElement(
+	          _Paper2.default,
+	          null,
+	          _react2.default.createElement(
+	            _MenuItem2.default,
+	            {
 	              onClick: this.openAddSourceDialog.bind(this),
 	              leftIcon: _react2.default.createElement(_addCircleOutline2.default, null) },
 	            'Add Source'
@@ -86348,8 +86414,21 @@
 	        _react2.default.createElement(_AddSourceDialog2.default, {
 	          onClose: this.closeAddSourceDialog.bind(this),
 	          createSource: this.props.createSource,
-	          open: this.state.addSourceDialogOpen })
+	          open: this.state.addSourceDialogOpen }),
+	        _react2.default.createElement(_AddSavedSearchDialog2.default, {
+	          onClose: (_context = this.props).closeAddSavedSearchDialog.bind(_context),
+	          createSavedSearch: this.props.createSavedSearch,
+	          open: this.props.ui.get('addSavedSearchDialogOpen') })
 	      );
+	    }
+	  }, {
+	    key: 'handleTouchTapSource',
+	    value: function handleTouchTapSource(source) {
+	      var _this3 = this;
+	
+	      return function () {
+	        _this3.props.fetchJobs({ source_id: source.get('id') });
+	      };
 	    }
 	  }, {
 	    key: 'openAddSourceDialog',
@@ -92824,11 +92903,21 @@
 	
 	var _sources2 = _interopRequireDefault(_sources);
 	
+	var _savedSearches = __webpack_require__(/*! ./savedSearches */ 990);
+	
+	var _savedSearches2 = _interopRequireDefault(_savedSearches);
+	
+	var _ui = __webpack_require__(/*! ./ui */ 993);
+	
+	var _ui2 = _interopRequireDefault(_ui);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = (0, _reduxImmutable.combineReducers)({
 	    jobs: _jobs2.default,
-	    sources: _sources2.default
+	    sources: _sources2.default,
+	    savedSearches: _savedSearches2.default,
+	    ui: _ui2.default
 	});
 
 /***/ }),
@@ -98192,6 +98281,312 @@
 	ActionLanguage.muiName = 'SvgIcon';
 	
 	exports.default = ActionLanguage;
+
+/***/ }),
+/* 989 */
+/*!**************************************************!*\
+  !*** ./~/material-ui/svg-icons/action/search.js ***!
+  \**************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 298);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _pure = __webpack_require__(/*! recompose/pure */ 801);
+	
+	var _pure2 = _interopRequireDefault(_pure);
+	
+	var _SvgIcon = __webpack_require__(/*! ../../SvgIcon */ 810);
+	
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ActionSearch = function ActionSearch(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' })
+	  );
+	};
+	ActionSearch = (0, _pure2.default)(ActionSearch);
+	ActionSearch.displayName = 'ActionSearch';
+	ActionSearch.muiName = 'SvgIcon';
+	
+	exports.default = ActionSearch;
+
+/***/ }),
+/* 990 */
+/*!******************************************************!*\
+  !*** ./assets/javascripts/reducers/savedSearches.js ***!
+  \******************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	exports.default = function () {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	    var action = arguments[1];
+	
+	    switch (action.type) {
+	        case _types.FETCH_SAVED_SEARCHES.REQUEST:
+	            return state.set('loading', true);
+	        case _types.FETCH_SAVED_SEARCHES.SUCCESS:
+	            return state.set('loading', false).set('results', (0, _immutable.fromJS)(action.payload));
+	        case _types.FETCH_SAVED_SEARCHES.FAILURE:
+	            return state.set('loading', false).set('error', true);
+	
+	        default:
+	            return state;
+	    }
+	};
+	
+	var _immutable = __webpack_require__(/*! immutable */ 980);
+	
+	var _types = __webpack_require__(/*! actions/types */ 758);
+	
+	var initialState = (0, _immutable.fromJS)({
+	    results: [],
+	    loading: true,
+	    error: false
+	});
+
+/***/ }),
+/* 991 */
+/*!******************************************!*\
+  !*** ./assets/javascripts/actions/ui.js ***!
+  \******************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.closeAddSavedSearchDialog = exports.openAddSavedSearchDialog = undefined;
+	
+	var _types = __webpack_require__(/*! ./types */ 758);
+	
+	var openAddSavedSearchDialog = exports.openAddSavedSearchDialog = function openAddSavedSearchDialog() {
+	  return {
+	    type: _types.OPEN_ADD_SAVED_SEARCH_DIALOG
+	  };
+	};
+	
+	var closeAddSavedSearchDialog = exports.closeAddSavedSearchDialog = function closeAddSavedSearchDialog() {
+	  return {
+	    type: _types.CLOSE_ADD_SAVED_SEARCH_DIALOG
+	  };
+	};
+
+/***/ }),
+/* 992 */
+/*!***************************************************************!*\
+  !*** ./assets/javascripts/components/AddSavedSearchDialog.js ***!
+  \***************************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 298);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Dialog = __webpack_require__(/*! material-ui/Dialog */ 965);
+	
+	var _Dialog2 = _interopRequireDefault(_Dialog);
+	
+	var _TextField = __webpack_require__(/*! material-ui/TextField */ 967);
+	
+	var _TextField2 = _interopRequireDefault(_TextField);
+	
+	var _FlatButton = __webpack_require__(/*! material-ui/FlatButton */ 973);
+	
+	var _FlatButton2 = _interopRequireDefault(_FlatButton);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var AddSavedSearchDialog = function (_Component) {
+	  _inherits(AddSavedSearchDialog, _Component);
+	
+	  function AddSavedSearchDialog() {
+	    _classCallCheck(this, AddSavedSearchDialog);
+	
+	    return _possibleConstructorReturn(this, (AddSavedSearchDialog.__proto__ || Object.getPrototypeOf(AddSavedSearchDialog)).apply(this, arguments));
+	  }
+	
+	  _createClass(AddSavedSearchDialog, [{
+	    key: 'render',
+	    value: function render() {
+	      var actions = [_react2.default.createElement(_FlatButton2.default, {
+	        label: 'Cancel',
+	        primary: true,
+	        onTouchTap: this.props.onClose
+	      }), _react2.default.createElement(_FlatButton2.default, {
+	        label: 'Create Saved Search',
+	        primary: true,
+	        keyboardFocused: true,
+	        onTouchTap: this.handleSubmit.bind(this)
+	      })];
+	
+	      return _react2.default.createElement(
+	        _Dialog2.default,
+	        {
+	          title: 'Add Saved Search',
+	          actions: actions,
+	          open: this.props.open },
+	        _react2.default.createElement(_TextField2.default, {
+	          onChange: this.handleQueryChange.bind(this),
+	          placeholder: 'Enter Query' })
+	      );
+	    }
+	  }, {
+	    key: 'handleQueryChange',
+	    value: function handleQueryChange(event, query) {
+	      this.setState({ query: query });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit() {
+	      this.props.createSavedSearch({
+	        query: this.state.query
+	      });
+	    }
+	  }]);
+	
+	  return AddSavedSearchDialog;
+	}(_react.Component);
+	
+	exports.default = AddSavedSearchDialog;
+
+/***/ }),
+/* 993 */
+/*!*******************************************!*\
+  !*** ./assets/javascripts/reducers/ui.js ***!
+  \*******************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	exports.default = function () {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	    var action = arguments[1];
+	
+	    switch (action.type) {
+	        case _types.CREATE_SAVED_SEARCH.SUCCESS:
+	            return state.set('addSavedSearchDialogOpen', false);
+	        case _types.OPEN_ADD_SAVED_SEARCH_DIALOG:
+	            return state.set('addSavedSearchDialogOpen', true);
+	        default:
+	            return state;
+	    }
+	};
+	
+	var _immutable = __webpack_require__(/*! immutable */ 980);
+	
+	var _types = __webpack_require__(/*! actions/types */ 758);
+	
+	var initialState = (0, _immutable.fromJS)({
+	    addSavedSearchDialogOpen: false,
+	    addSourceDialogOpen: false
+	});
+
+/***/ }),
+/* 994 */
+/*!*********************************************************!*\
+  !*** ./assets/javascripts/actions/createSavedSearch.js ***!
+  \*********************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function (attributes) {
+	  return _defineProperty({}, _reduxApiMiddleware.CALL_API, {
+	    endpoint: "/api/saved_searches",
+	    method: 'POST',
+	    headers: { 'Content-Type': 'application/json' },
+	    body: JSON.stringify({ saved_search: attributes }),
+	    types: [{
+	      type: _types.CREATE_SAVED_SEARCH.REQUEST
+	    }, {
+	      type: _types.CREATE_SAVED_SEARCH.SUCCESS
+	    }, {
+	      type: _types.CREATE_SAVED_SEARCH.FAILURE
+	    }]
+	  });
+	};
+	
+	var _reduxApiMiddleware = __webpack_require__(/*! redux-api-middleware */ 667);
+	
+	var _types = __webpack_require__(/*! actions/types */ 758);
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/***/ }),
+/* 995 */
+/*!**********************************************************!*\
+  !*** ./assets/javascripts/actions/fetchSavedSearches.js ***!
+  \**********************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function (params) {
+	  return _defineProperty({}, _reduxApiMiddleware.CALL_API, {
+	    endpoint: "/api/saved_searches",
+	    method: 'GET',
+	    headers: { 'Content-Type': 'application/json' },
+	    body: JSON.stringify(params),
+	    types: [{
+	      type: _types.FETCH_SAVED_SEARCHES.REQUEST
+	    }, {
+	      type: _types.FETCH_SAVED_SEARCHES.SUCCESS
+	    }, {
+	      type: _types.FETCH_SAVED_SEARCHES.FAILURE
+	    }]
+	  });
+	};
+	
+	var _reduxApiMiddleware = __webpack_require__(/*! redux-api-middleware */ 667);
+	
+	var _types = __webpack_require__(/*! actions/types */ 758);
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /***/ })
 /******/ ]);

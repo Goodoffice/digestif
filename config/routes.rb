@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get 'api/sources' => 'api/sources#index'
   post 'api/sources' => 'api/sources#create'
 
+  get 'api/saved_searches' => 'api/saved_searches#index'
+  post 'api/saved_searches' => 'api/saved_searches#create'
+
 
 
   root to: 'site#show'

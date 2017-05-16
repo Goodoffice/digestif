@@ -7,14 +7,12 @@ export default class extends React.Component {
         super(props);
         this.props.fetchSources();
         this.props.fetchJobs();
+        this.props.fetchSavedSearches();
     }
     render() {
         return (
             <div>
-                <AppDrawer
-                  openAddSourceDialog={this.props.openAddSourceDialog}
-                  createSource={this.props.createSource}
-                  sources={this.props.sources} />
+                <AppDrawer {...this.props} />
                 <JobList jobs={this.props.jobs} />
             </div>
         );

@@ -7,8 +7,10 @@ import MenuItem from 'material-ui/MenuItem';
 import RssFeedIcon from 'material-ui/svg-icons/communication/rss-feed';
 import AddCircleOutlineIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import LanguageIcon from 'material-ui/svg-icons/action/language';
+import SearchIcon from 'material-ui/svg-icons/action/search';
 
 import AddSourceDialog from './AddSourceDialog';
+import AddSavedSearchDialog from './AddSavedSearchDialog';
 
 class AppDrawer extends React.Component {
 
@@ -24,7 +26,17 @@ class AppDrawer extends React.Component {
     return this.props.sources.get('results').map(source => (
         <MenuItem
           leftIcon={<RssFeedIcon />}
-          key={source.url}>{source.get('name')}</MenuItem>
+          onTouchTap={::this.handleTouchTapSource(source)}
+          key={source.get('url')}>{source.get('name')}</MenuItem>
+    ));
+  }
+
+  renderSavedSearches() {
+    return this.props.savedSearches.get('results').map(savedSearch => (
+        <MenuItem
+          leftIcon={<SearchIcon />}>
+          {savedSearch.get('query')}
+        </MenuItem>
     ));
   }
 
@@ -36,6 +48,16 @@ class AppDrawer extends React.Component {
                 leftIcon={<LanguageIcon />}>
                 All Jobs
               </MenuItem>
+            </Paper>
+
+            <Paper>
+                <MenuItem
+                  onClick={::this.props.openAddSavedSearchDialog}
+                  leftIcon={<AddCircleOutlineIcon />}>
+                  Add Saved Search
+                </MenuItem>
+
+                {this.renderSavedSearches()}
             </Paper>
 
             <Paper>
@@ -53,8 +75,19 @@ class AppDrawer extends React.Component {
               createSource={this.props.createSource}
               open={this.state.addSourceDialogOpen} />
 
+            <AddSavedSearchDialog
+              onClose={::this.props.closeAddSavedSearchDialog}
+              createSavedSearch={this.props.createSavedSearch}
+              open={this.props.ui.get('addSavedSearchDialogOpen')} />
+
         </Drawer>
     );
+  }
+
+  handleTouchTapSource(source) {
+    return () => {
+      this.props.fetchJobs({ source_id: source.get('id') })
+    };
   }
 
   openAddSourceDialog() {
@@ -64,6 +97,7 @@ class AppDrawer extends React.Component {
   closeAddSourceDialog() {
     this.setState({ addSourceDialogOpen: false });
   }
+
 }
 
 export default AppDrawer;
