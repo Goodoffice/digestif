@@ -2,7 +2,7 @@ class API::SavedSearchesController < API::BaseController
 
   def index
     @saved_searches = SavedSearch.all
-    render json: @saved_searches
+    render json: @saved_searches, scope: current_user
   end
 
   def create

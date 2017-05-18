@@ -41,14 +41,16 @@ body {
 /* ----------------------------------------------------------------- */
 
 h1 {
-  padding: 1.0em 0.5em;
+  margin: 0;
+  padding: 1.0em 0.5em 0.5em 0.5em;
   font-size: 24px;
   font-weight: 200;
   background: black;
 }
 
 h2 {
-  font-weight: normal;
+  margin-top: 0;
+  font-weight: bold;
   text-align: left;
   font-size: 2em;
   padding: 0 0.5em;

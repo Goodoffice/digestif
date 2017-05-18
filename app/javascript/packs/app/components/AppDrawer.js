@@ -31,16 +31,6 @@ class AppDrawer extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      addSourceDialogOpen: false
-    };
-
-    this._openAddSavedSearchDialog = this.props.openAddSavedSearchDialog.bind(this);
-    this._openAddSourceDialog = this.openAddSourceDialog.bind(this);
-
-    this._closeAddSourceDialog = this.closeAddSourceDialog.bind(this);
-    this._closeAddSavedSearchDialog = this.props.closeAddSavedSearchDialog.bind(this);
   }
 
   renderSources() {
@@ -63,9 +53,10 @@ class AppDrawer extends React.Component {
 
       return (
         <LinkedMenuItem
+          style={{fontWeight: savedSearch.get('unread_count') ? 'bold' : 'normal'}}
           to={pathname}
           key={savedSearch.get('query')}>
-          #{savedSearch.get('query')}
+          #{savedSearch.get('query')} ({savedSearch.get('unread_count')})
         </LinkedMenuItem>
       );
     });
@@ -87,33 +78,7 @@ class AppDrawer extends React.Component {
               </LinkedMenuItem>
 
               {this.renderSavedSearches()}
-
-              <div style={{padding: '0.5em 0'}}>
-                <FlatButton
-                  onClick={this._openAddSavedSearchDialog}
-                  label="Add Saved Search"
-                  icon={<AddCircleOutlineIcon />} />
-              </div>
-
-              {this.renderSources()}
-              <div style={{padding: '0.5em 0'}}>
-                <FlatButton
-                  onClick={this._openAddSourceDialog}
-                  label="Add Source"
-                  icon={<AddCircleOutlineIcon />}/>
-              </div>
-
             </Menu>
-
-            <AddSourceDialog
-              onClose={this._closeAddSourceDialog}
-              createSource={this.props.createSource}
-              open={this.state.addSourceDialogOpen} />
-
-            <AddSavedSearchDialog
-              onClose={this._closeAddSavedSearchDialog}
-              createSavedSearch={this.props.createSavedSearch}
-              open={this.props.ui.get('addSavedSearchDialogOpen')} />
 
         </Drawer>
     );
@@ -123,14 +88,6 @@ class AppDrawer extends React.Component {
     return () => {
       this.props.fetchJobs({ source_id: source.get('id') })
     };
-  }
-
-  openAddSourceDialog() {
-    this.setState({ addSourceDialogOpen: true });
-  }
-
-  closeAddSourceDialog() {
-    this.setState({ addSourceDialogOpen: false });
   }
 
 }
