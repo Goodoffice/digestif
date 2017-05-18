@@ -76,6 +76,8 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano-yarn (2.0.2)
+      capistrano (~> 3.0)
     case_transform (0.2)
       activesupport
     chronic (0.10.2)
@@ -287,6 +289,7 @@ DEPENDENCIES
   capistrano-passenger
   capistrano-rails
   capistrano-rvm
+  capistrano-yarn
   coffee-rails
   colorize
   compass-rails

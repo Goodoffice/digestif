@@ -28,6 +28,7 @@ gem 'flutie'
 gem 'capistrano', '~> 3.1'
 gem 'capistrano-rails'
 gem 'capistrano-bundler', '~> 1.1.2'
+gem 'capistrano-yarn'
 gem 'capistrano-rvm'
 gem 'capistrano-passenger'
 
