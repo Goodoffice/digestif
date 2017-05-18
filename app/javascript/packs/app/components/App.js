@@ -2,6 +2,9 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+import AppBar from 'material-ui/AppBar';
+import ExitIcon from 'material-ui/svg-icons/action/exit-to-app';
+
 import JobList from '../containers/JobList';
 import AppDrawer from './AppDrawer';
 
@@ -46,6 +49,10 @@ class App extends React.Component {
       return (
         <Router history={history}>
           <div>
+              <AppBar
+                title="Hacker Jobs"
+                iconElementRight={<ExitIcon />} />
+
               <AppDrawer {...this.props} />
 
               <Route path="/search/:query" component={JobList} />

@@ -12,20 +12,18 @@ html {
 }
 
 html, body {
-  font-family:  "Neue Haas Grotesk Std Text 55 Roman", "Helvetica Neue", Helvetica, Sans-serif;
+  font-family:  "Roboto", sans-serif;
   font-size: 16px;
 
 }
 
 body {
-  @include neue-haas-grotesk-text;
   margin: 0;
   padding: 0;
 }
 
 
 .container {
-  margin-left: 400px;
 }
 
 .brand {
@@ -42,20 +40,10 @@ body {
 /* ----------------------------------------------------------------- */
 
 h1 {
-  border-top: 8px solid $base03;
-  font-weight: normal;
-  padding-top: 0.33em;
-  margin: 2em 0 0em;
-  @include neue-haas-grotesk-black;
-  color: $base03;
-  text-align: left;
-  line-height: 1em;
-  font-size: 3em;
 }
 
 h2 {
   font-weight: normal;
-  @include neue-haas-grotesk-bold;
   text-align: left;
   font-size: 2em;
   padding: 0 0.5em;
@@ -73,10 +61,8 @@ h2 {
 .create-digest-form {
   margin: 3em 0 0;
   input {
-    @include neue-haas-grotesk-bold;
     @include placeholder {
       color: $base02;
-      @include neue-haas-grotesk-bold;
     }
     border-width: 0;
     text-align: left;
@@ -125,7 +111,6 @@ h2 {
     text-align: center;
     @include box-shadow(0.5em 0.5em 0 lighten($accent2, 25%));
     background: $accent2;
-    @include neue-haas-grotesk-bold;
     color: white;
     &:focus {
       outline: none;
@@ -141,5 +126,5 @@ h2 {
 
 
 .job-list {
-
+  padding: 1em;
 }

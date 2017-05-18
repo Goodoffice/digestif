@@ -54,7 +54,10 @@ class AppDrawer extends React.Component {
 
   render() {
     return (
-        <Drawer open={true} width={400}>
+        <Drawer
+          openSecondary={true}
+          open={true}
+          width={400}>
             <Paper>
               <MenuItem
                 containerElement={<Link to="/" />}
