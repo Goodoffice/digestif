@@ -5,6 +5,7 @@ set :repo_url, 'git@github.com:teejayvanslyke/digestif.git'
 set :deploy_to, "/home/deploy/digestif"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :yarn_flags, '--silent --no-progress'
 
 namespace :deploy do
 
