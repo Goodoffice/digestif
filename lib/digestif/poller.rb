@@ -1,4 +1,4 @@
-require 'colorize' 
+require 'colorize'
 
 module Digestif
 
@@ -12,12 +12,9 @@ module Digestif
     end
 
     def run
-      SourceList.find_each do |source_list|
-        puts source_list.name.blue
-        source_list.sources.each do |source|
-          puts "↓ #{source.name}".green
-          source.ingest_entries!
-        end
+      Source.find_each do |source|
+        puts "↓ #{source.name}".green
+        source.ingest_entries!
       end
     end
 
