@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import JobList from '../components/JobList';
-import fetchJobs from 'actions/fetchJobs';
+import fetchJobs from '../actions/fetchJobs';
 
 export const mapStateToProps = (state, ownProps) => {
   return {

@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { FETCH_JOBS } from 'actions/types';
+import { FETCH_JOBS } from '../actions/types';
 
 const initialState = fromJS({
     results: [],

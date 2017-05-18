@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/rails/webpacker.git
+  revision: ebcc609c490e7fb5b416253e657b2d35d736a126
+  specs:
+    webpacker (1.2)
+      activesupport (>= 4.2)
+      multi_json (~> 1.2)
+      railties (>= 4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -303,6 +312,7 @@ DEPENDENCIES
   vcr
   web-console (~> 3.0)
   webmock
+  webpacker!
   whenever
 
 BUNDLED WITH

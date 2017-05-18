@@ -1,5 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
-import { FETCH_SAVED_SEARCHES } from 'actions/types';
+import { FETCH_SAVED_SEARCHES } from './types';
 
 export default function(params) {
   return {

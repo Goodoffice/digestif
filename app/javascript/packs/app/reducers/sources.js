@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { FETCH_SOURCES, CREATE_SOURCE } from 'actions/types';
+import { FETCH_SOURCES, CREATE_SOURCE } from '../actions/types';
 import { lowerCase } from 'lodash';
 
 const initialState = fromJS({

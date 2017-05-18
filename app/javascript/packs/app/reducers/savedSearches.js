@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { FETCH_SAVED_SEARCHES } from 'actions/types';
+import { FETCH_SAVED_SEARCHES } from '../actions/types';
 
 const initialState = fromJS({
     results: [],

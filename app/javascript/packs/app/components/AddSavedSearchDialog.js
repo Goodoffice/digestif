@@ -6,6 +6,13 @@ import FlatButton from 'material-ui/FlatButton';
 
 class AddSavedSearchDialog extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this._handleSubmit = this.handleSubmit.bind(this);
+    this._handleQueryChange = this.handleQueryChange.bind(this);
+  }
+
   render() {
     const actions = [
       <FlatButton
@@ -17,7 +24,7 @@ class AddSavedSearchDialog extends Component {
         label="Create Saved Search"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={::this.handleSubmit}
+        onTouchTap={this._handleSubmit}
         />,
       ];
 
@@ -28,7 +35,7 @@ class AddSavedSearchDialog extends Component {
         open={this.props.open}>
 
         <TextField
-          onChange={::this.handleQueryChange}
+          onChange={this._handleQueryChange}
           placeholder="Enter Query" />
 
       </Dialog>

@@ -1,5 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
-import { FETCH_SOURCES } from 'actions/types';
+import { FETCH_SOURCES } from './types';
 
 export default function() {
   return {

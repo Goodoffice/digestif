@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 import {
   CREATE_SAVED_SEARCH,
   OPEN_ADD_SAVED_SEARCH_DIALOG
-} from 'actions/types';
+} from '../actions/types';
 
 const initialState = fromJS({
   addSavedSearchDialogOpen: false,

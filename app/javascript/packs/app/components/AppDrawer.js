@@ -25,6 +25,12 @@ class AppDrawer extends React.Component {
     this.state = {
       addSourceDialogOpen: false
     };
+
+    this._openAddSavedSearchDialog = this.props.openAddSavedSearchDialog.bind(this);
+    this._openAddSourceDialog = this.props.openAddSourceDialog.bind(this);
+
+    this._closeAddSourceDialog = this.closeAddSourceDialog.bind(this);
+    this._closeAddSavedSearchDialog = this.props.closeAddSavedSearchDialog.bind(this);
   }
 
   renderSources() {
@@ -62,7 +68,7 @@ class AppDrawer extends React.Component {
 
               <div style={{padding: '0.5em 0'}}>
                 <FlatButton
-                  onClick={::this.props.openAddSavedSearchDialog}
+                  onClick={this._openAddSavedSearchDialog}
                   label="Add Saved Search"
                   icon={<AddCircleOutlineIcon />} />
               </div>
@@ -73,7 +79,7 @@ class AppDrawer extends React.Component {
               {this.renderSources()}
               <div style={{padding: '0.5em 0'}}>
                 <FlatButton
-                  onClick={::this.openAddSourceDialog}
+                  onClick={this._openAddSourceDialog}
                   label="Add Source"
                   icon={<AddCircleOutlineIcon />}/>
               </div>
@@ -81,12 +87,12 @@ class AppDrawer extends React.Component {
             </Paper>
 
             <AddSourceDialog
-              onClose={::this.closeAddSourceDialog}
+              onClose={this._closeAddSourceDialog}
               createSource={this.props.createSource}
               open={this.state.addSourceDialogOpen} />
 
             <AddSavedSearchDialog
-              onClose={::this.props.closeAddSavedSearchDialog}
+              onClose={this._closeAddSavedSearchDialog}
               createSavedSearch={this.props.createSavedSearch}
               open={this.props.ui.get('addSavedSearchDialogOpen')} />
 

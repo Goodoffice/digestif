@@ -59,15 +59,15 @@ class App extends React.Component {
 
 import { connect } from 'react-redux'
 
-import fetchJobs from 'actions/fetchJobs';
-import fetchSources from 'actions/fetchSources';
-import fetchSavedSearches from 'actions/fetchSavedSearches';
-import createSource from 'actions/createSource';
-import createSavedSearch from 'actions/createSavedSearch';
+import fetchJobs from '../actions/fetchJobs';
+import fetchSources from '../actions/fetchSources';
+import fetchSavedSearches from '../actions/fetchSavedSearches';
+import createSource from '../actions/createSource';
+import createSavedSearch from '../actions/createSavedSearch';
 import {
   openAddSavedSearchDialog,
   closeAddSavedSearchDialog
-} from 'actions/ui';
+} from '../actions/ui';
 
 export const mapStateToProps = (state, ownProps) => {
   return {

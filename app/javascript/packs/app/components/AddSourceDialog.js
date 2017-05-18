@@ -6,6 +6,14 @@ import FlatButton from 'material-ui/FlatButton';
 
 class AddSourceDialog extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this._handleURLChange = this.handleURLChange.bind(this);
+    this._handleNameChange = this.handleNameChange.bind(this);
+    this._handleSubmit = this.handleSubmit.bind(this);
+  }
+
   render() {
     const actions = [
       <FlatButton
@@ -17,7 +25,7 @@ class AddSourceDialog extends Component {
         label="Create Source"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={::this.handleSubmit}
+        onTouchTap={this._handleSubmit}
         />,
       ];
 
@@ -28,11 +36,11 @@ class AddSourceDialog extends Component {
         open={this.props.open}>
 
         <TextField
-          onChange={::this.handleURLChange}
+          onChange={this._handleURLChange}
           placeholder="Enter URL" />
 
         <TextField
-          onChange={::this.handleNameChange}
+          onChange={this._handleNameChange}
           placeholder="Enter Source Name (optional)" />
 
       </Dialog>

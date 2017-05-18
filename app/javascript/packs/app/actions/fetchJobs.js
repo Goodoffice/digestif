@@ -1,5 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
-import { FETCH_JOBS } from 'actions/types';
+import { FETCH_JOBS } from './types';
 
 import queryString from 'query-string';
 

@@ -1,22 +1,22 @@
 import { CALL_API } from 'redux-api-middleware';
-import { CREATE_SAVED_SEARCH } from 'actions/types';
+import { CREATE_SOURCE } from './types';
 
 export default function(attributes) {
   return {
     [CALL_API]: {
-      endpoint: "/api/saved_searches",
+      endpoint: "/api/sources",
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ saved_search: attributes }),
+      body: JSON.stringify({ source: attributes }),
       types: [
         {
-            type: CREATE_SAVED_SEARCH.REQUEST
+            type: CREATE_SOURCE.REQUEST
         },
         {
-            type: CREATE_SAVED_SEARCH.SUCCESS
+            type: CREATE_SOURCE.SUCCESS
         },
         {
-            type: CREATE_SAVED_SEARCH.FAILURE
+            type: CREATE_SOURCE.FAILURE
         }
       ],
     }
