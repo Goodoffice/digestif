@@ -50,7 +50,6 @@ class AppDrawer extends React.Component {
       return(
         <LinkedMenuItem
           to={pathname}
-          leftIcon={<RssFeedIcon />}
           key={source.get('url')}>
           {source.get('name')}
         </LinkedMenuItem>
@@ -65,8 +64,7 @@ class AppDrawer extends React.Component {
       return (
         <LinkedMenuItem
           to={pathname}
-          key={savedSearch.get('query')}
-          leftIcon={<SearchIcon />}>
+          key={savedSearch.get('query')}>
           #{savedSearch.get('query')}
         </LinkedMenuItem>
       );
@@ -84,8 +82,7 @@ class AppDrawer extends React.Component {
               value={this.props.router.get('location').get('pathname')}>
 
               <LinkedMenuItem
-                to="/"
-                leftIcon={<LanguageIcon />}>
+                to="/">
                 All Jobs
               </LinkedMenuItem>
 

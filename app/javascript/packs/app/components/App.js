@@ -4,7 +4,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 import JobList from '../containers/JobList';
-import TopBar from './TopBar';
+import AppDrawer from './AppDrawer';
 
 import { Provider } from 'react-redux';
 import { Map } from 'immutable';
@@ -48,7 +48,7 @@ class App extends React.Component {
       return (
         <Router history={history}>
           <div>
-              <TopBar {...this.props} />
+              <AppDrawer {...this.props} />
 
               <Route path="/search/:query" component={JobList} />
               <Route path="/sources/:sourceId" component={JobList} />
@@ -98,9 +98,12 @@ const ConnectedApp = connect(
   mapDispatchToProps
 )(App)
 
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 const Wrapper = props => (
   <Provider store={store}>
-    <MuiThemeProvider>
+    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
       <ConnectedApp />
     </MuiThemeProvider>
   </Provider>

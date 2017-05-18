@@ -46,7 +46,11 @@ export default class extends React.Component {
 
   render() {
       if (this.isLoading()) {
-          return (<CircularProgress />);
+          return (
+            <div className="job-list job-list--loading">
+              <CircularProgress />
+            </div>
+          );
       }
       else {
           return (

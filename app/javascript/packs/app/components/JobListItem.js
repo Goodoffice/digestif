@@ -20,6 +20,7 @@ export default class extends React.Component {
         return (
             <a style={{textDecoration: 'none'}} href={this.props.job.get('url')} target="_blank">
                 <ListItem
+                  style={{color: 'black'}}
                   leftAvatar={this.getAvatar()}
                   primaryText={this.getPrimaryText()}
                   secondaryText={this.getSecondaryText()} />
@@ -47,7 +48,9 @@ export default class extends React.Component {
 
     getSecondaryText() {
         return (
-            moment(this.props.job.get('published_at')).fromNow() + " on " + this.props.job.get('source_name')
+            <div style={{color: 'black'}}>
+              {moment(this.props.job.get('published_at')).fromNow() + " on " + this.props.job.get('source_name')}
+            </div>
         );
     }
 }
