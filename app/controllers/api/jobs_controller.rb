@@ -1,6 +1,6 @@
 class API::JobsController < API::BaseController
   def index
-    @entries = filtered_entries.order('published_at DESC').limit(100)
+    @entries = filtered_entries.reorder('published_at DESC').limit(500)
     render json: @entries
   end
 

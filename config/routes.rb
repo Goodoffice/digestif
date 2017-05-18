@@ -1,9 +1,9 @@
-require 'digestif/mail_preview'
+require 'hacker_jobs/mail_preview'
 
 Rails.application.routes.draw do
   get 'digests/show'
 
-  mount Digestif::MailPreview => 'mail_preview'
+  mount HackerJobs::MailPreview => 'mail_preview'
 
   post 'api/source_lists' => 'api/source_lists#create'
   get 'digests/:slug' => 'digests#show'

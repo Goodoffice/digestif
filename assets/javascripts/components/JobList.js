@@ -9,16 +9,39 @@ export default class extends React.Component {
     super(props);
 
     this.props.fetchJobs({
-      query: props.match.params.query
+      query: props.match.params.query,
+      sourceId: props.match.params.sourceId
     });
   }
 
   getTitle() {
     if (this.props.match.params.query) {
-      return this.props.match.params.query;
+      return '#' + this.props.match.params.query;
     }
 
     return "All Jobs";
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const query = this.props.match.params.query;
+    const nextQuery = nextProps.match.params.query;
+    if (query !== nextQuery) {
+      this.props.fetchJobs({
+        query: nextQuery,
+        sourceId: this.props.match.params.sourceId
+      });
+
+      return
+    }
+
+    const sourceId = this.props.match.params.sourceId;
+    const nextSourceId = nextProps.match.params.sourceId;
+    if (query !== nextQuery) {
+      this.props.fetchJobs({
+        query: this.props.match.params.query,
+        sourceId: nextSourceId
+      });
+    }
   }
 
   render() {

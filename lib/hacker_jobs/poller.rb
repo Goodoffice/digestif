@@ -1,6 +1,6 @@
 require 'colorize'
 
-module Digestif
+module HackerJobs
 
   class Poller
 

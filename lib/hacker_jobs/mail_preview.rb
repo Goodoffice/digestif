@@ -1,4 +1,4 @@
-module Digestif
+module HackerJobs
 
   class MailPreview < MailView
 
@@ -7,5 +7,5 @@ module Digestif
     end
 
   end
-  
+
 end

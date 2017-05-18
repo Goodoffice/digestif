@@ -7,6 +7,7 @@ import {
 import Drawer from 'material-ui/Drawer';
 import Paper from 'material-ui/Paper';
 import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
 
 import RssFeedIcon from 'material-ui/svg-icons/communication/rss-feed';
 import AddCircleOutlineIcon from 'material-ui/svg-icons/content/add-circle-outline';
@@ -30,7 +31,7 @@ class AppDrawer extends React.Component {
     return this.props.sources.get('results').map(source => (
         <MenuItem
           leftIcon={<RssFeedIcon />}
-          onTouchTap={::this.handleTouchTapSource(source)}
+          containerElement={<Link activeClassName="active" to={"/sources/" + source.get('id')} />}
           key={source.get('url')}>{source.get('name')}</MenuItem>
     ));
   }
@@ -38,9 +39,9 @@ class AppDrawer extends React.Component {
   renderSavedSearches() {
     return this.props.savedSearches.get('results').map(savedSearch => (
         <MenuItem
-          containerElement={<Link to={"/search/" + savedSearch.get('query')} />}
+          containerElement={<Link activeClassName="active" to={"/search/" + savedSearch.get('query')} />}
           leftIcon={<SearchIcon />}>
-          {savedSearch.get('query')}
+          #{savedSearch.get('query')}
         </MenuItem>
     ));
   }
@@ -57,23 +58,26 @@ class AppDrawer extends React.Component {
             </Paper>
 
             <Paper>
-                <MenuItem
-                  onClick={::this.props.openAddSavedSearchDialog}
-                  leftIcon={<AddCircleOutlineIcon />}>
-                  Add Saved Search
-                </MenuItem>
+              {this.renderSavedSearches()}
 
-                {this.renderSavedSearches()}
+              <div style={{padding: '0.5em 0'}}>
+                <FlatButton
+                  onClick={::this.props.openAddSavedSearchDialog}
+                  label="Add Saved Search"
+                  icon={<AddCircleOutlineIcon />} />
+              </div>
+
             </Paper>
 
             <Paper>
-                <MenuItem
+              {this.renderSources()}
+              <div style={{padding: '0.5em 0'}}>
+                <FlatButton
                   onClick={::this.openAddSourceDialog}
-                  leftIcon={<AddCircleOutlineIcon />}>
-                  Add Source
-                </MenuItem>
+                  label="Add Source"
+                  icon={<AddCircleOutlineIcon />}/>
+              </div>
 
-                {this.renderSources()}
             </Paper>
 
             <AddSourceDialog

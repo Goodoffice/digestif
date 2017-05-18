@@ -41790,7 +41790,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -41818,67 +41818,91 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _class = function (_React$Component) {
-	    _inherits(_class, _React$Component);
+	  _inherits(_class, _React$Component);
 	
-	    function _class(props) {
-	        _classCallCheck(this, _class);
+	  function _class(props) {
+	    _classCallCheck(this, _class);
 	
-	        var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 	
-	        _this.props.fetchJobs({
-	            query: props.match.params.query
-	        });
-	        return _this;
+	    _this.props.fetchJobs({
+	      query: props.match.params.query,
+	      sourceId: props.match.params.sourceId
+	    });
+	    return _this;
+	  }
+	
+	  _createClass(_class, [{
+	    key: 'getTitle',
+	    value: function getTitle() {
+	      if (this.props.match.params.query) {
+	        return '#' + this.props.match.params.query;
+	      }
+	
+	      return "All Jobs";
 	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      var query = this.props.match.params.query;
+	      var nextQuery = nextProps.match.params.query;
+	      if (query !== nextQuery) {
+	        this.props.fetchJobs({
+	          query: nextQuery,
+	          sourceId: this.props.match.params.sourceId
+	        });
 	
-	    _createClass(_class, [{
-	        key: 'getTitle',
-	        value: function getTitle() {
-	            if (this.props.match.params.query) {
-	                return this.props.match.params.query;
-	            }
+	        return;
+	      }
 	
-	            return "All Jobs";
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            if (this.isLoading()) {
-	                return _react2.default.createElement(_CircularProgress2.default, null);
-	            } else {
-	                return _react2.default.createElement(
-	                    'div',
-	                    { className: 'job-list' },
-	                    _react2.default.createElement(
-	                        'h2',
-	                        null,
-	                        this.getTitle()
-	                    ),
-	                    _react2.default.createElement(
-	                        _List.List,
-	                        null,
-	                        this.renderItems()
-	                    )
-	                );
-	            }
-	        }
-	    }, {
-	        key: 'isLoading',
-	        value: function isLoading() {
-	            return this.props.jobs.get('loading');
-	        }
-	    }, {
-	        key: 'renderItems',
-	        value: function renderItems() {
-	            return this.props.jobs.get('results').map(function (entry) {
-	                return _react2.default.createElement(_JobListItem2.default, {
-	                    key: entry.get('id'),
-	                    job: entry });
-	            });
-	        }
-	    }]);
+	      var sourceId = this.props.match.params.sourceId;
+	      var nextSourceId = nextProps.match.params.sourceId;
+	      if (query !== nextQuery) {
+	        this.props.fetchJobs({
+	          query: this.props.match.params.query,
+	          sourceId: nextSourceId
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this.isLoading()) {
+	        return _react2.default.createElement(_CircularProgress2.default, null);
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          { className: 'job-list' },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            this.getTitle()
+	          ),
+	          _react2.default.createElement(
+	            _List.List,
+	            null,
+	            this.renderItems()
+	          )
+	        );
+	      }
+	    }
+	  }, {
+	    key: 'isLoading',
+	    value: function isLoading() {
+	      return this.props.jobs.get('loading');
+	    }
+	  }, {
+	    key: 'renderItems',
+	    value: function renderItems() {
+	      return this.props.jobs.get('results').map(function (entry) {
+	        return _react2.default.createElement(_JobListItem2.default, {
+	          key: entry.get('id'),
+	          job: entry });
+	      });
+	    }
+	  }]);
 	
-	    return _class;
+	  return _class;
 	}(_react2.default.Component);
 	
 	exports.default = _class;
@@ -47639,6 +47663,7 @@
 	                'a',
 	                { style: { textDecoration: 'none' }, href: this.props.job.get('url'), target: '_blank' },
 	                _react2.default.createElement(_List.ListItem, {
+	                    leftAvatar: this.getAvatar(),
 	                    primaryText: this.props.job.get('title'),
 	                    secondaryText: this.getSecondaryText() })
 	            );
@@ -47651,16 +47676,12 @@
 	    }, {
 	        key: 'getAvatar',
 	        value: function getAvatar() {
-	            if (this.hasFavicon()) {
-	                return _react2.default.createElement(_Avatar2.default, { backgroundColor: '#ffffff', src: this.props.job.get('favicon_url') });
-	            } else {
-	                var themeIndex = this.props.job.get('source_id') % THEMES.length;
-	                return _react2.default.createElement(
-	                    _Avatar2.default,
-	                    THEMES[themeIndex],
-	                    this.getAvatarLetter()
-	                );
-	            }
+	            var themeIndex = this.props.job.get('source_id') % THEMES.length;
+	            return _react2.default.createElement(
+	                _Avatar2.default,
+	                THEMES[themeIndex],
+	                this.getAvatarLetter()
+	            );
 	        }
 	    }, {
 	        key: 'getAvatarLetter',
@@ -86548,6 +86569,10 @@
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
+	var _FlatButton = __webpack_require__(/*! material-ui/FlatButton */ 1011);
+	
+	var _FlatButton2 = _interopRequireDefault(_FlatButton);
+	
 	var _rssFeed = __webpack_require__(/*! material-ui/svg-icons/communication/rss-feed */ 998);
 	
 	var _rssFeed2 = _interopRequireDefault(_rssFeed);
@@ -86597,14 +86622,12 @@
 	  _createClass(AppDrawer, [{
 	    key: 'renderSources',
 	    value: function renderSources() {
-	      var _this2 = this;
-	
 	      return this.props.sources.get('results').map(function (source) {
 	        return _react2.default.createElement(
 	          _MenuItem2.default,
 	          {
 	            leftIcon: _react2.default.createElement(_rssFeed2.default, null),
-	            onTouchTap: _this2.handleTouchTapSource.call(_this2, source),
+	            containerElement: _react2.default.createElement(_reactRouterDom.Link, { activeClassName: 'active', to: "/sources/" + source.get('id') }),
 	            key: source.get('url') },
 	          source.get('name')
 	        );
@@ -86617,8 +86640,9 @@
 	        return _react2.default.createElement(
 	          _MenuItem2.default,
 	          {
-	            containerElement: _react2.default.createElement(_reactRouterDom.Link, { to: "/search/" + savedSearch.get('query') }),
+	            containerElement: _react2.default.createElement(_reactRouterDom.Link, { activeClassName: 'active', to: "/search/" + savedSearch.get('query') }),
 	            leftIcon: _react2.default.createElement(_search2.default, null) },
+	          '#',
 	          savedSearch.get('query')
 	        );
 	      });
@@ -86645,26 +86669,28 @@
 	        _react2.default.createElement(
 	          _Paper2.default,
 	          null,
+	          this.renderSavedSearches(),
 	          _react2.default.createElement(
-	            _MenuItem2.default,
-	            {
+	            'div',
+	            { style: { padding: '0.5em 0' } },
+	            _react2.default.createElement(_FlatButton2.default, {
 	              onClick: (_context = this.props).openAddSavedSearchDialog.bind(_context),
-	              leftIcon: _react2.default.createElement(_addCircleOutline2.default, null) },
-	            'Add Saved Search'
-	          ),
-	          this.renderSavedSearches()
+	              label: 'Add Saved Search',
+	              icon: _react2.default.createElement(_addCircleOutline2.default, null) })
+	          )
 	        ),
 	        _react2.default.createElement(
 	          _Paper2.default,
 	          null,
+	          this.renderSources(),
 	          _react2.default.createElement(
-	            _MenuItem2.default,
-	            {
+	            'div',
+	            { style: { padding: '0.5em 0' } },
+	            _react2.default.createElement(_FlatButton2.default, {
 	              onClick: this.openAddSourceDialog.bind(this),
-	              leftIcon: _react2.default.createElement(_addCircleOutline2.default, null) },
-	            'Add Source'
-	          ),
-	          this.renderSources()
+	              label: 'Add Source',
+	              icon: _react2.default.createElement(_addCircleOutline2.default, null) })
+	          )
 	        ),
 	        _react2.default.createElement(_AddSourceDialog2.default, {
 	          onClose: this.closeAddSourceDialog.bind(this),
@@ -86679,10 +86705,10 @@
 	  }, {
 	    key: 'handleTouchTapSource',
 	    value: function handleTouchTapSource(source) {
-	      var _this3 = this;
+	      var _this2 = this;
 	
 	      return function () {
-	        _this3.props.fetchJobs({ source_id: source.get('id') });
+	        _this2.props.fetchJobs({ source_id: source.get('id') });
 	      };
 	    }
 	  }, {

@@ -26,7 +26,6 @@ body {
 
 .container {
   margin-left: 400px;
-  padding: 1em;
 }
 
 .brand {
@@ -57,10 +56,9 @@ h1 {
 h2 {
   font-weight: normal;
   @include neue-haas-grotesk-bold;
-  color: $base01;
   text-align: left;
   font-size: 2em;
-  padding: 0.5em;
+  padding: 0 0.5em;
   line-height: 1em;
 }
 

@@ -20,6 +20,7 @@ export default class extends React.Component {
         return (
             <a style={{textDecoration: 'none'}} href={this.props.job.get('url')} target="_blank">
                 <ListItem
+                    leftAvatar={this.getAvatar()}
                     primaryText={this.props.job.get('title')}
                     secondaryText={this.getSecondaryText()} />
             </a>
@@ -31,13 +32,8 @@ export default class extends React.Component {
     }
 
     getAvatar() {
-        if (this.hasFavicon()) {
-            return (<Avatar backgroundColor='#ffffff' src={this.props.job.get('favicon_url')} />);
-        }
-        else {
-            const themeIndex = this.props.job.get('source_id') % THEMES.length;
-            return (<Avatar {...THEMES[themeIndex]}>{this.getAvatarLetter()}</Avatar>);
-        }
+        const themeIndex = this.props.job.get('source_id') % THEMES.length;
+        return (<Avatar {...THEMES[themeIndex]}>{this.getAvatarLetter()}</Avatar>);
     }
 
     getAvatarLetter() {
