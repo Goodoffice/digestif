@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import { FETCH_SAVED_SEARCHES } from '../actions/types';
+import { lowerCase } from 'lodash';
 
 const initialState = fromJS({
     results: [],
@@ -15,7 +16,7 @@ export default function(state=initialState, action) {
         case FETCH_SAVED_SEARCHES.SUCCESS:
             return state
                 .set('loading', false)
-                .set('results', fromJS(action.payload));
+                .set('results', fromJS(action.payload).sortBy(s => lowerCase(s.get('query'))));
         case FETCH_SAVED_SEARCHES.FAILURE:
             return state
                 .set('loading', false)
