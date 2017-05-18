@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'api/saved_searches' => 'api/saved_searches#index'
   post 'api/saved_searches' => 'api/saved_searches#create'
 
+  get '/*url' => 'site#show', constraints: { format: :html }
 
-
-  root to: 'site#show'
+  root 'site#show'
 end

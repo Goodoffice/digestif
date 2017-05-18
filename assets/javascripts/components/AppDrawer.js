@@ -1,5 +1,9 @@
 import React from 'react';
 
+import {
+    Link
+} from 'react-router-dom';
+
 import Drawer from 'material-ui/Drawer';
 import Paper from 'material-ui/Paper';
 import MenuItem from 'material-ui/MenuItem';
@@ -34,6 +38,7 @@ class AppDrawer extends React.Component {
   renderSavedSearches() {
     return this.props.savedSearches.get('results').map(savedSearch => (
         <MenuItem
+          containerElement={<Link to={"/search/" + savedSearch.get('query')} />}
           leftIcon={<SearchIcon />}>
           {savedSearch.get('query')}
         </MenuItem>
@@ -45,6 +50,7 @@ class AppDrawer extends React.Component {
         <Drawer open={true} width={400}>
             <Paper>
               <MenuItem
+                containerElement={<Link to="/" />}
                 leftIcon={<LanguageIcon />}>
                 All Jobs
               </MenuItem>

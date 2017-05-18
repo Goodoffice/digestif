@@ -12,6 +12,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'pg_search'
 gem 'mail_view'
 gem 'roadie-rails', '~> 1.0'
 gem 'factory_girl_rails'

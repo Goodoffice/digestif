@@ -1,13 +1,15 @@
 import { CALL_API } from 'redux-api-middleware';
 import { FETCH_JOBS } from 'actions/types';
 
+import queryString from 'query-string';
+
+const toQueryString = params => queryString.stringify(params);
+
 export default function(params) {
   return {
     [CALL_API]: {
-      endpoint: "/api/jobs",
+      endpoint: `/api/jobs?${toQueryString(params)}`,
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(params),
       types: [
         {
             type: FETCH_JOBS.REQUEST

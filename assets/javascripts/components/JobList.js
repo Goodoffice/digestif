@@ -5,35 +5,47 @@ import JobListItem from './JobListItem';
 
 export default class extends React.Component {
 
-    getTitle() {
-      return "All Jobs";
+  constructor(props) {
+    super(props);
+
+    this.props.fetchJobs({
+      query: props.match.params.query
+    });
+  }
+
+  getTitle() {
+    if (this.props.match.params.query) {
+      return this.props.match.params.query;
     }
 
-    render() {
-        if (this.isLoading()) {
-            return (<CircularProgress />);
-        }
-        else {
-            return (
-                <div className="job-list">
-                  <h2>{this.getTitle()}</h2>
-                  <List>
-                      {this.renderItems()}
-                  </List>
-                </div>
-            );
-        }
-    }
+    return "All Jobs";
+  }
 
-    isLoading() {
-        return (this.props.jobs.get('loading'));
-    }
+  render() {
+      if (this.isLoading()) {
+          return (<CircularProgress />);
+      }
+      else {
+          return (
+              <div className="job-list">
+                <h2>{this.getTitle()}</h2>
+                <List>
+                    {this.renderItems()}
+                </List>
+              </div>
+          );
+      }
+  }
 
-    renderItems() {
-        return this.props.jobs.get('results').map(entry => (
-            <JobListItem
-                key={entry.get('id')}
-                job={entry} />
-        ));
-    }
+  isLoading() {
+      return (this.props.jobs.get('loading'));
+  }
+
+  renderItems() {
+      return this.props.jobs.get('results').map(entry => (
+          <JobListItem
+              key={entry.get('id')}
+              job={entry} />
+      ));
+  }
 }
