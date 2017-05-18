@@ -1,23 +1,21 @@
-import { CALL_API } from 'redux-api-middleware';
+import apiCall from './apiCall';
 import { FETCH_SOURCES } from './types';
 
 export default function() {
-  return {
-    [CALL_API]: {
-      endpoint: "/api/sources",
-      method: 'GET',
-      types: [
-        {
-            type: FETCH_SOURCES.REQUEST
-        },
-        {
-            type: FETCH_SOURCES.SUCCESS
-        },
-        {
-            type: FETCH_SOURCES.FAILURE
-        }
-      ],
-    }
-  };
-}
+  return apiCall({
+    endpoint: "/api/sources",
+    method: 'GET',
+    types: [
+      {
+          type: FETCH_SOURCES.REQUEST
+      },
+      {
+          type: FETCH_SOURCES.SUCCESS
+      },
+      {
+          type: FETCH_SOURCES.FAILURE
+      }
+    ],
+  });
+};
 

@@ -27,7 +27,7 @@ class AppDrawer extends React.Component {
     };
 
     this._openAddSavedSearchDialog = this.props.openAddSavedSearchDialog.bind(this);
-    this._openAddSourceDialog = this.props.openAddSourceDialog.bind(this);
+    this._openAddSourceDialog = this.openAddSourceDialog.bind(this);
 
     this._closeAddSourceDialog = this.closeAddSourceDialog.bind(this);
     this._closeAddSavedSearchDialog = this.props.closeAddSavedSearchDialog.bind(this);

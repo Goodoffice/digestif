@@ -1,6 +1,7 @@
 require 'hacker_jobs/mail_preview'
 
 Rails.application.routes.draw do
+  devise_for :users
   get 'digests/show'
 
   mount HackerJobs::MailPreview => 'mail_preview'

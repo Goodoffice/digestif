@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'webpacker', github: 'rails/webpacker'
 
+gem 'devise'
 gem 'pg_search'
 gem 'mail_view'
 gem 'roadie-rails', '~> 1.0'

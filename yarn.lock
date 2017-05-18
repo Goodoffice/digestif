@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@aftonbladet/redux-api-middleware@*":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@aftonbladet/redux-api-middleware/-/redux-api-middleware-1.1.1.tgz#461ece66c89ff0f62892045d56b39d4ec6d71a23"
+  dependencies:
+    babel-runtime "^6"
+    isomorphic-fetch "^2.1.1"
+    lodash.isplainobject "^3.2.0"
+
 abbrev@1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -948,13 +956,7 @@ babel-register@^6.24.1:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@^5.8.25:
-  version "5.8.38"
-  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-5.8.38.tgz#1c0b02eb63312f5f087ff20450827b425c9d4c19"
-  dependencies:
-    core-js "^1.0.0"
-
-babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.20.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0:
+babel-runtime@^6, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.20.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
   dependencies:
@@ -4983,14 +4985,6 @@ reduce-function-call@^1.0.1:
   resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
-
-redux-api-middleware@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/redux-api-middleware/-/redux-api-middleware-1.0.3.tgz#e49cd393d21c3ba640350f141eaa82298deba7a2"
-  dependencies:
-    babel-runtime "^5.8.25"
-    isomorphic-fetch "^2.1.1"
-    lodash.isplainobject "^3.2.0"
 
 redux-immutable@^3.0.8:
   version "3.1.0"

@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { Map } from 'immutable';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { ConnectedRouter as Router, connectRouter, routerMiddleware } from 'connected-react-router/immutable';
-import { apiMiddleware } from 'redux-api-middleware';
+import { apiMiddleware } from '@aftonbladet/redux-api-middleware';
 import reducer from '../reducers/index';
 
 import {
