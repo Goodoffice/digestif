@@ -20,15 +20,20 @@ export default class extends React.Component {
         return (
             <a style={{textDecoration: 'none'}} href={this.props.job.get('url')} target="_blank">
                 <ListItem
-                    leftAvatar={this.getAvatar()}
-                    primaryText={this.props.job.get('title')}
-                    secondaryText={this.getSecondaryText()} />
+                  leftAvatar={this.getAvatar()}
+                  primaryText={this.getPrimaryText()}
+                  secondaryText={this.getSecondaryText()} />
             </a>
         );
     }
 
     hasFavicon() {
         return !!this.props.job.get('favicon_url');
+    }
+
+    getPrimaryText() {
+      const text = this.props.job.get('title');
+      return <span style={{fontWeight: this.props.job.get('unread') ? 'bold' : 'normal'}}>{text}</span>;
     }
 
     getAvatar() {
