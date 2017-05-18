@@ -2,16 +2,15 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import AppBar from 'material-ui/AppBar';
-import ExitIcon from 'material-ui/svg-icons/action/exit-to-app';
 
 import JobList from '../containers/JobList';
-import AppDrawer from './AppDrawer';
+import TopBar from './TopBar';
 
 import { Provider } from 'react-redux';
 import { Map } from 'immutable';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { ConnectedRouter as Router, connectRouter, routerMiddleware } from 'connected-react-router/immutable';
+import { withRouter } from 'react-router-dom';
 import { apiMiddleware } from '@aftonbladet/redux-api-middleware';
 import reducer from '../reducers/index';
 
@@ -49,11 +48,7 @@ class App extends React.Component {
       return (
         <Router history={history}>
           <div>
-              <AppBar
-                title="Hacker Jobs"
-                iconElementRight={<ExitIcon />} />
-
-              <AppDrawer {...this.props} />
+              <TopBar {...this.props} />
 
               <Route path="/search/:query" component={JobList} />
               <Route path="/sources/:sourceId" component={JobList} />
@@ -81,7 +76,8 @@ export const mapStateToProps = (state, ownProps) => {
     sources: state.get('sources'),
     savedSearches: state.get('savedSearches'),
     jobs: state.get('jobs'),
-    ui: state.get('ui')
+    ui: state.get('ui'),
+    router: state.get('router')
   }
 }
 

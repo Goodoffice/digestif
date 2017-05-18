@@ -6,6 +6,7 @@ import {
 
 import Drawer from 'material-ui/Drawer';
 import Paper from 'material-ui/Paper';
+import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -16,6 +17,15 @@ import SearchIcon from 'material-ui/svg-icons/action/search';
 
 import AddSourceDialog from './AddSourceDialog';
 import AddSavedSearchDialog from './AddSavedSearchDialog';
+
+const LinkedMenuItem = props => (
+  <MenuItem
+    value={props.to}
+    containerElement={<Link to={props.to} />}
+    {...props}>
+    {props.children}
+  </MenuItem>
+);
 
 class AppDrawer extends React.Component {
 
@@ -34,39 +44,51 @@ class AppDrawer extends React.Component {
   }
 
   renderSources() {
-    return this.props.sources.get('results').map(source => (
-        <MenuItem
+    return this.props.sources.get('results').map(source => {
+      const pathname = "/sources/" + source.get('id');
+
+      return(
+        <LinkedMenuItem
+          to={pathname}
           leftIcon={<RssFeedIcon />}
-          containerElement={<Link activeClassName="active" to={"/sources/" + source.get('id')} />}
-          key={source.get('url')}>{source.get('name')}</MenuItem>
-    ));
+          key={source.get('url')}>
+          {source.get('name')}
+        </LinkedMenuItem>
+      );
+    });
   }
 
   renderSavedSearches() {
-    return this.props.savedSearches.get('results').map(savedSearch => (
-        <MenuItem
-          containerElement={<Link activeClassName="active" to={"/search/" + savedSearch.get('query')} />}
+    return this.props.savedSearches.get('results').map(savedSearch => {
+      const pathname = "/search/" + savedSearch.get('query');
+
+      return (
+        <LinkedMenuItem
+          to={pathname}
+          key={savedSearch.get('query')}
           leftIcon={<SearchIcon />}>
           #{savedSearch.get('query')}
-        </MenuItem>
-    ));
+        </LinkedMenuItem>
+      );
+    });
   }
 
   render() {
     return (
         <Drawer
-          openSecondary={true}
-          open={true}
-          width={400}>
-            <Paper>
-              <MenuItem
-                containerElement={<Link to="/" />}
+          open={this.props.open}>
+            <h1>Hacker Jobs</h1>
+
+            <Menu
+              selectedMenuItemStyle={ {backgroundColor: '#c00', color: '#FFFFFF'} }
+              value={this.props.router.get('location').get('pathname')}>
+
+              <LinkedMenuItem
+                to="/"
                 leftIcon={<LanguageIcon />}>
                 All Jobs
-              </MenuItem>
-            </Paper>
+              </LinkedMenuItem>
 
-            <Paper>
               {this.renderSavedSearches()}
 
               <div style={{padding: '0.5em 0'}}>
@@ -76,9 +98,6 @@ class AppDrawer extends React.Component {
                   icon={<AddCircleOutlineIcon />} />
               </div>
 
-            </Paper>
-
-            <Paper>
               {this.renderSources()}
               <div style={{padding: '0.5em 0'}}>
                 <FlatButton
@@ -87,7 +106,7 @@ class AppDrawer extends React.Component {
                   icon={<AddCircleOutlineIcon />}/>
               </div>
 
-            </Paper>
+            </Menu>
 
             <AddSourceDialog
               onClose={this._closeAddSourceDialog}
