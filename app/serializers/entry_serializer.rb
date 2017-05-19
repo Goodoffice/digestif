@@ -1,5 +1,5 @@
 class EntrySerializer < ActiveModel::Serializer
-  attributes :id, :title, :published_at, :favicon_url, :url, :source_id, :source_name, :unread
+  attributes :id, :title, :published_at, :favicon_url, :url, :source_id, :source_name, :unread, :starred
 
   def favicon_url
     object.source.favicon_url
@@ -15,6 +15,10 @@ class EntrySerializer < ActiveModel::Serializer
 
   def unread
     object.unread?(scope)
+  end
+
+  def starred
+    object.starred?(scope)
   end
 
 end

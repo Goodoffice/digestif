@@ -9,6 +9,7 @@ export default class extends React.Component {
     super(props);
 
     this.props.fetchJobs({
+      starred: props.match.path === '/starred',
       query: props.match.params.query,
       sourceId: props.match.params.sourceId
     });
@@ -27,6 +28,7 @@ export default class extends React.Component {
     const nextQuery = nextProps.match.params.query;
     if (query !== nextQuery) {
       this.props.fetchJobs({
+        starred: this.props.match.path === '/starred',
         query: nextQuery,
         sourceId: this.props.match.params.sourceId
       });
@@ -72,6 +74,7 @@ export default class extends React.Component {
       return this.props.jobs.get('results').map(entry => (
           <JobListItem
             markRead={this.props.markRead}
+            toggleStar={this.props.toggleStar}
             key={entry.get('id')}
             job={entry} />
       ));

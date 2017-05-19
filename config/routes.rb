@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get 'api/sources' => 'api/sources#index'
   post 'api/sources' => 'api/sources#create'
 
+  post 'api/jobs/:entry_id/star' => 'api/stars#create'
+  delete 'api/jobs/:entry_id/star' => 'api/stars#destroy'
+
   get 'api/saved_searches' => 'api/saved_searches#index'
   post 'api/saved_searches' => 'api/saved_searches#create'
 

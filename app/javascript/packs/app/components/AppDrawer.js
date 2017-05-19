@@ -58,6 +58,13 @@ class AppDrawer extends React.Component {
               value={this.props.router.get('location').get('pathname')}>
 
               <MenuItem
+                value='/starred'
+                containerElement={<Link to='/starred' />}
+                {...this.props}>
+                Starred
+              </MenuItem>
+
+              <MenuItem
                 value='/'
                 containerElement={<Link to='/' />}
                 {...this.props}>

@@ -12,3 +12,7 @@ export const OPEN_ADD_SAVED_SEARCH_DIALOG = Symbol('OPEN_ADD_SAVED_SEARCH_DIALOG
 export const CLOSE_ADD_SAVED_SEARCH_DIALOG = Symbol('CLOSE_ADD_SAVED_SEARCH_DIALOG');
 
 export const MARK_READ = Symbol('MARK_READ');
+
+export const STAR = ApiActionTypesEnum();
+export const UNSTAR = ApiActionTypesEnum();
+

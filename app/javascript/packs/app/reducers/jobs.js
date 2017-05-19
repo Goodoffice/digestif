@@ -1,5 +1,9 @@
 import { fromJS } from 'immutable';
-import { MARK_READ, FETCH_JOBS } from '../actions/types';
+import {
+  MARK_READ,
+  STAR, UNSTAR,
+  FETCH_JOBS
+} from '../actions/types';
 
 const initialState = fromJS({
     results: [],
@@ -7,18 +11,23 @@ const initialState = fromJS({
     error: false
 });
 
-const handleMarkRead = (state, action) => {
-  const results = state.get('results');
-  const index = results.findIndex(job => job.get('id') === action.job.get('id'));
+const findIndex = (state, job) => state.get('results').findIndex(j => j.get('id') === job.get('id'));
+const setIndex = (state, index, job) => state.set('results', state.get('results').set(index, job));
+const replaceResult = (state, job) => setIndex(state, findIndex(state, job), job)
 
-  return state
-    .set('results', results.set(index, action.job.set('unread', false)));
-}
+const handleMarkRead = (state, action) => replaceResult(state, action.job.set('unread', false));
+const handleStar = (state, action) => replaceResult(state, action.payload.job.set('starred', true));
+const handleUnstar = (state, action) => replaceResult(state, action.payload.job.set('starred', false));
+
 
 export default function(state=initialState, action) {
   switch (action.type) {
     case MARK_READ:
       return handleMarkRead(state, action);
+    case STAR.SUCCESS:
+      return handleStar(state, action);
+    case UNSTAR.SUCCESS:
+      return handleUnstar(state, action);
     case FETCH_JOBS.REQUEST:
       return state
         .set('loading', true);

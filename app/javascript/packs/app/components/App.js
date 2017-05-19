@@ -50,6 +50,7 @@ class App extends React.Component {
           <div>
               <AppDrawer {...this.props} />
 
+              <Route path="/starred" component={JobList} />
               <Route path="/search/:query" component={JobList} />
               <Route path="/sources/:sourceId" component={JobList} />
               <Route exact path="/" component={JobList} />

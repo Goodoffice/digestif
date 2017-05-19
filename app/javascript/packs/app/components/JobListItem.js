@@ -22,7 +22,6 @@ export default class extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { starred: false };
     this._read = this.read.bind(this);
     this._star = this.star.bind(this);
   }
@@ -34,7 +33,7 @@ export default class extends React.Component {
 
   star(event) {
     event.stopPropagation();
-    this.setState({starred: !this.state.starred});
+    this.props.toggleStar(this.props.job);
   }
 
   render() {
@@ -43,7 +42,7 @@ export default class extends React.Component {
             onTouchTap={this._read}
             style={{color: 'black'}}
             leftAvatar={this.getAvatar()}
-            rightIconButton={<StarIconButton checked={this.state.starred} onChange={this._star}/>}
+            rightIconButton={<StarIconButton checked={this.props.job.get('starred')} onChange={this._star}/>}
             primaryText={this.getPrimaryText()}
             secondaryText={this.getSecondaryText()} />
       );
