@@ -71,8 +71,9 @@ export default class extends React.Component {
   renderItems() {
       return this.props.jobs.get('results').map(entry => (
           <JobListItem
-              key={entry.get('id')}
-              job={entry} />
+            markRead={this.props.markRead}
+            key={entry.get('id')}
+            job={entry} />
       ));
   }
 }

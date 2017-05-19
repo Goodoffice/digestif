@@ -16,41 +16,49 @@ const THEMES = [
 ];
 
 export default class extends React.Component {
-    render() {
-        return (
-            <a style={{textDecoration: 'none'}} href={this.props.job.get('url')} target="_blank">
-                <ListItem
-                  style={{color: 'black'}}
-                  leftAvatar={this.getAvatar()}
-                  primaryText={this.getPrimaryText()}
-                  secondaryText={this.getSecondaryText()} />
-            </a>
-        );
-    }
 
-    hasFavicon() {
-        return !!this.props.job.get('favicon_url');
-    }
+  constructor(props) {
+    super(props);
 
-    getPrimaryText() {
-      const text = this.props.job.get('title');
-      return <span style={{fontWeight: this.props.job.get('unread') ? 'bold' : 'normal'}}>{text}</span>;
-    }
+    this._markRead = () => this.props.markRead(this.props.job);
+  }
 
-    getAvatar() {
-        const themeIndex = this.props.job.get('source_id') % THEMES.length;
-        return (<Avatar {...THEMES[themeIndex]}>{this.getAvatarLetter()}</Avatar>);
-    }
+  render() {
+      return (
+          <a style={{textDecoration: 'none'}} href={this.props.job.get('url')} target="_blank">
+              <ListItem
+                onTouchTap={this._markRead}
+                style={{color: 'black'}}
+                leftAvatar={this.getAvatar()}
+                primaryText={this.getPrimaryText()}
+                secondaryText={this.getSecondaryText()} />
+          </a>
+      );
+  }
 
-    getAvatarLetter() {
-        return capitalize(this.props.job.get('source_name')[0]);
-    }
+  hasFavicon() {
+      return !!this.props.job.get('favicon_url');
+  }
 
-    getSecondaryText() {
-        return (
-            <div style={{color: 'black'}}>
-              {moment(this.props.job.get('published_at')).fromNow() + " on " + this.props.job.get('source_name')}
-            </div>
-        );
-    }
+  getPrimaryText() {
+    const text = this.props.job.get('title');
+    return <span style={{fontWeight: this.props.job.get('unread') ? 'bold' : 'normal'}}>{text}</span>;
+  }
+
+  getAvatar() {
+      const themeIndex = this.props.job.get('source_id') % THEMES.length;
+      return (<Avatar {...THEMES[themeIndex]}>{this.getAvatarLetter()}</Avatar>);
+  }
+
+  getAvatarLetter() {
+      return capitalize(this.props.job.get('source_name')[0]);
+  }
+
+  getSecondaryText() {
+      return (
+          <div style={{color: 'black'}}>
+            {moment(this.props.job.get('published_at')).fromNow() + " on " + this.props.job.get('source_name')}
+          </div>
+      );
+  }
 }
