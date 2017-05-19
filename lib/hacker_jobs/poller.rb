@@ -12,7 +12,7 @@ module HackerJobs
     end
 
     def run
-      Source.find_each do |source|
+      ScraperSource.find_each do |source|
         puts "↓ #{source.name}".green
         source.ingest_entries!
       end

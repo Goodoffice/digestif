@@ -15,6 +15,7 @@ gem 'webpacker', github: 'rails/webpacker'
 gem 'erubis'
 gem 'rails_admin', '~> 1.1.1'
 
+gem 'wombat'
 gem 'unread'
 gem 'devise'
 gem 'pg_search'
