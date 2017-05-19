@@ -134,6 +134,11 @@ h2 {
 
 .job-list {
   padding: 1em;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.job-list h2 {
+  margin-top: 1em;
 }
 
 .job-list--loading {
