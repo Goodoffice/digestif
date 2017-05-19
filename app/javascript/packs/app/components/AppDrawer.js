@@ -33,31 +33,17 @@ class AppDrawer extends React.Component {
     super(props);
   }
 
-  renderSources() {
-    return this.props.sources.get('results').map(source => {
-      const pathname = "/sources/" + source.get('id');
-
-      return(
-        <LinkedMenuItem
-          to={pathname}
-          key={source.get('url')}>
-          {source.get('name')}
-        </LinkedMenuItem>
-      );
-    });
-  }
-
   renderSavedSearches() {
     return this.props.savedSearches.get('results').map(savedSearch => {
       const pathname = "/search/" + savedSearch.get('query');
 
       return (
-        <LinkedMenuItem
-          style={{fontWeight: savedSearch.get('unread_count') ? 'bold' : 'normal'}}
-          to={pathname}
-          key={savedSearch.get('query')}>
+        <MenuItem
+          value={pathname}
+          containerElement={<Link to={pathname} />}
+          {...this.props}>
           #{savedSearch.get('query')} ({savedSearch.get('unread_count')})
-        </LinkedMenuItem>
+        </MenuItem>
       );
     });
   }
@@ -69,13 +55,14 @@ class AppDrawer extends React.Component {
             <h1>Hacker Jobs</h1>
 
             <Menu
-              selectedMenuItemStyle={ {backgroundColor: '#c00', color: '#FFFFFF'} }
               value={this.props.router.get('location').get('pathname')}>
 
-              <LinkedMenuItem
-                to="/">
+              <MenuItem
+                value='/'
+                containerElement={<Link to='/' />}
+                {...this.props}>
                 All Jobs
-              </LinkedMenuItem>
+              </MenuItem>
 
               {this.renderSavedSearches()}
             </Menu>
