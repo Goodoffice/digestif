@@ -2,8 +2,9 @@ class API::JobsController < API::BaseController
   def index
     @entries = filtered_entries.
       with_read_marks_for(current_user).
-      reorder('published_at DESC').
-      limit(500)
+      where(['published_at > ? and published_at < ?', 14.days.ago, Time.now ]).
+      reorder('published_at DESC')
+
     render json: @entries, scope: current_user
   end
 

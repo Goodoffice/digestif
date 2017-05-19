@@ -16,6 +16,10 @@ module HackerJobs
         puts "↓ #{source.name}".green
         source.ingest_entries!
       end
+
+      SavedSearch.find_each do |saved_search|
+        saved_search.update_entry_count!
+      end
     end
 
   end

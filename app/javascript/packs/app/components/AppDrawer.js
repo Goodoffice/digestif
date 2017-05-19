@@ -42,7 +42,7 @@ class AppDrawer extends React.Component {
           value={pathname}
           containerElement={<Link to={pathname} />}
           {...this.props}>
-          #{savedSearch.get('query')} ({savedSearch.get('unread_count')})
+          #{savedSearch.get('query')} ({savedSearch.get('entry_count')})
         </MenuItem>
       );
     });
