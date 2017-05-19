@@ -5,6 +5,8 @@ import {ListItem} from 'material-ui/List';
 import {capitalize} from 'lodash';
 import Chip from 'material-ui/Chip';
 
+import StarIconButton from './StarIconButton';
+
 import { blue500, red500, green500, purple500, yellow500, black, white } from 'material-ui/styles/colors';
 
 const THEMES = [
@@ -15,24 +17,35 @@ const THEMES = [
     { backgroundColor: yellow500, color: black }
 ];
 
+
 export default class extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = { starred: false };
+    this._read = this.read.bind(this);
+    this._star = this.star.bind(this);
+  }
 
-    this._markRead = () => this.props.markRead(this.props.job);
+  read() {
+    this.props.markRead(this.props.job);
+    window.open(this.props.job.get('url'));
+  }
+
+  star(event) {
+    event.stopPropagation();
+    this.setState({starred: !this.state.starred});
   }
 
   render() {
       return (
-          <a style={{textDecoration: 'none'}} href={this.props.job.get('url')} target="_blank">
-              <ListItem
-                onTouchTap={this._markRead}
-                style={{color: 'black'}}
-                leftAvatar={this.getAvatar()}
-                primaryText={this.getPrimaryText()}
-                secondaryText={this.getSecondaryText()} />
-          </a>
+          <ListItem
+            onTouchTap={this._read}
+            style={{color: 'black'}}
+            leftAvatar={this.getAvatar()}
+            rightIconButton={<StarIconButton checked={this.state.starred} onChange={this._star}/>}
+            primaryText={this.getPrimaryText()}
+            secondaryText={this.getSecondaryText()} />
       );
   }
 
@@ -42,7 +55,7 @@ export default class extends React.Component {
 
   getPrimaryText() {
     const text = this.props.job.get('title');
-    return <span style={{fontWeight: this.props.job.get('unread') ? 'bold' : 'normal'}}>{text}</span>;
+    return <div style={{fontWeight: this.props.job.get('unread') ? 'bold' : 'normal'}}>{text}</div>;
   }
 
   getAvatar() {
