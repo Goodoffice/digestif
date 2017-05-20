@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'webpacker', github: 'rails/webpacker'
 gem 'erubis'
 gem 'rails_admin', '~> 1.1.1'
+gem 'dotenv-rails'
 
 gem 'wombat'
 gem 'unread'

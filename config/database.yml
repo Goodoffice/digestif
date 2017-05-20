@@ -12,3 +12,7 @@ test:
   <<: *default
   database: digestif_test
 
+production:
+  <<: *default
+  database: digestif_development
+
