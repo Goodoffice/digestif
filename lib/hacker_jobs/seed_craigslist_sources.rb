@@ -24,18 +24,12 @@ module HackerJobs
 
         puts name.green
 
-        Source.create!(
-          name: "craigslist: #{name}",
-          url: "#{base_uri}/search/cpg?format=rss"
-        )
-        Source.create!(
-          name: "craigslist: #{name}",
-          url: "#{base_uri}/search/sof?format=rss"
-        )
-        Source.create!(
-          name: "craigslist: #{name}",
-          url: "#{base_uri}/search/web?format=rss"
-        )
+        [ "freelance%20developer", "freelance%20designer" ].each do |query|
+          Source.create!(
+            name: "craigslist: #{name}",
+            url: "#{base_uri}/search/jjj?is_telecommuting=1&query=#{query}&sort=rel&format=rss"
+          )
+        end
       end
     end
 
