@@ -1,7 +1,6 @@
 class FeedSource < Source
 
   before_validation :assign_name, on: :create
-  before_create :ingest_entries
 
   def ingest_entries
     open_rss do |rss|
