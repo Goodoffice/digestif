@@ -6,7 +6,7 @@ class Source < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :url
   belongs_to :list, class_name: 'SourceList', foreign_key: 'list_id'
-  has_many :entries, -> { order('published_at DESC') }
+  has_many :entries, -> { order('published_at DESC') }, dependent: :destroy
 
   protected
 
