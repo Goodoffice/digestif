@@ -14,13 +14,15 @@ module HackerJobs
     end
 
     def us_cities_page
-      @us_cities_page ||= Nokogiri::HTML(open("https://geo.craigslist.org/iso/us"))
     end
 
     def run
-      us_cities_page.css('.geo-site-list li a').each do |a_tag|
+      page = Nokogiri::HTML(open("https://geo.craigslist.org/iso/us"))
+      page.css('.geo-site-list li a').each do |a_tag|
         name = a_tag.text
         base_uri = a_tag.attribute('href').value
+
+        puts name.green
 
         Source.create!(
           name: "craigslist: #{name}",
