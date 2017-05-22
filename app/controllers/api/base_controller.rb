@@ -1,5 +1,5 @@
 class API::BaseController < ApplicationController
   respond_to :json
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 end
 
