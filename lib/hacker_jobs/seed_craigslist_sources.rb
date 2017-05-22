@@ -36,7 +36,7 @@ module HackerJobs
 
         Source.create!(
           name: "craigslist: #{name}",
-          url: "#{base_uri}/search/cpg&format=rss"
+          url: "#{base_uri}/search/cpg?format=rss"
         )
       end
     end
