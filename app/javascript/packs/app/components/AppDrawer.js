@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { capitalize } from 'lodash';
 import {
     Link
 } from 'react-router-dom';
@@ -42,7 +43,7 @@ class AppDrawer extends React.Component {
           value={pathname}
           containerElement={<Link to={pathname} />}
           {...this.props}>
-          #{savedSearch.get('query')} ({savedSearch.get('entry_count')})
+          {capitalize(savedSearch.get('query'))} ({savedSearch.get('entry_count')})
         </MenuItem>
       );
     });
@@ -52,7 +53,7 @@ class AppDrawer extends React.Component {
     return (
         <Drawer
           open={this.props.open}>
-            <h1>Hacker Jobs</h1>
+            <h1>Hacker Leads</h1>
 
             <Menu
               value={this.props.router.get('location').get('pathname')}>

@@ -3,6 +3,7 @@ import {List} from 'material-ui/List';
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import JobListItem from './JobListItem';
+import { capitalize } from 'lodash';
 
 export default class extends React.Component {
 
@@ -15,10 +16,17 @@ export default class extends React.Component {
 
   getTitle() {
     if (this.props.match.params.query) {
-      return '#' + this.props.match.params.query;
+      return capitalize(this.props.match.params.query) + " Leads";
+    }
+    else if (this.isStarred()) {
+      return "Starred";
     }
 
     return "All Jobs";
+  }
+
+  isStarred() {
+    return this.props.match.path === '/starred';
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,7 +41,7 @@ export default class extends React.Component {
     const { match, jobs } = this.props;
 
     this.props.fetchJobs({
-      starred: match.path === '/starred',
+      starred: this.isStarred(),
       query: query,
       sourceId: match.params.sourceId,
       page: page
