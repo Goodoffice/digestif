@@ -1,18 +1,16 @@
 import React from 'react';
 import {List} from 'material-ui/List';
 import CircularProgress from 'material-ui/CircularProgress';
+import RaisedButton from 'material-ui/RaisedButton';
 import JobListItem from './JobListItem';
 
 export default class extends React.Component {
 
   constructor(props) {
     super(props);
+    this.fetchJobs(this.props.match.params.query, 1);
 
-    this.props.fetchJobs({
-      starred: props.match.path === '/starred',
-      query: props.match.params.query,
-      sourceId: props.match.params.sourceId
-    });
+    this._handleViewMore = this.handleViewMore.bind(this);
   }
 
   getTitle() {
@@ -27,47 +25,64 @@ export default class extends React.Component {
     const query = this.props.match.params.query;
     const nextQuery = nextProps.match.params.query;
     if (query !== nextQuery) {
-      this.props.fetchJobs({
-        starred: this.props.match.path === '/starred',
-        query: nextQuery,
-        sourceId: this.props.match.params.sourceId
-      });
-
-      return
+      this.fetchJobs(nextQuery, 1);
     }
+  }
 
-    const sourceId = this.props.match.params.sourceId;
-    const nextSourceId = nextProps.match.params.sourceId;
-    if (query !== nextQuery) {
-      this.props.fetchJobs({
-        query: this.props.match.params.query,
-        sourceId: nextSourceId
-      });
+  fetchJobs(query, page) {
+    const { match, jobs } = this.props;
+
+    this.props.fetchJobs({
+      starred: match.path === '/starred',
+      query: query,
+      sourceId: match.params.sourceId,
+      page: page
+    });
+  }
+
+  renderProgress() {
+    if (this.isLoading()) {
+      return (
+        <CircularProgress />
+      );
     }
   }
 
   render() {
-      if (this.isLoading()) {
-          return (
-            <div className="job-list job-list--loading">
-              <CircularProgress />
-            </div>
-          );
-      }
-      else {
-          return (
-              <div className="job-list">
-                <h2>{this.getTitle()}</h2>
-                <List>
-                    {this.renderItems()}
-                </List>
-              </div>
-          );
-      }
+    return (
+        <div className="job-list">
+          <h2>{this.getTitle()}</h2>
+          <List>
+              {this.renderItems()}
+          </List>
+
+          {this.renderPaginator()}
+        </div>
+    );
   }
 
   isLoading() {
       return (this.props.jobs.get('loading'));
+  }
+
+  handleViewMore() {
+    const { match, jobs } = this.props;
+    this.fetchJobs(match.params.query, jobs.get('page') + 1);
+  }
+
+  renderPaginator() {
+    return (
+      <div className="JobList__Paginator">
+        {this.renderProgress()}
+        {this.renderViewMoreButton()}
+      </div>
+    );
+  }
+
+  renderViewMoreButton() {
+    if (this.props.jobs.get('more')) {
+        return <RaisedButton label="View More" onTouchTap={this._handleViewMore} />
+    }
   }
 
   renderItems() {

@@ -16,6 +16,7 @@ gem 'erubis'
 gem 'rails_admin', '~> 1.1.1'
 gem 'dotenv-rails'
 
+gem 'kaminari'
 gem 'wombat'
 gem 'unread'
 gem 'devise'

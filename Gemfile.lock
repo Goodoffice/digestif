@@ -379,6 +379,7 @@ DEPENDENCIES
   htmlentities
   jbuilder (~> 2.0)
   jquery-rails
+  kaminari
   mail_view
   pg
   pg_search

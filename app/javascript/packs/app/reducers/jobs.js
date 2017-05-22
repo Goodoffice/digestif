@@ -7,6 +7,8 @@ import {
 
 const initialState = fromJS({
     results: [],
+    more: false,
+    page: 0,
     loading: true,
     error: false
 });
@@ -20,6 +22,19 @@ const handleStar = (state, action) => replaceResult(state, action.payload.job.se
 const handleUnstar = (state, action) => replaceResult(state, action.payload.job.set('starred', false));
 
 
+const handleFetchJobsSuccess = (state, action) => {
+  const results =
+    action.payload.page > 0 ?
+    state.get('results').concat(fromJS(action.payload.jobs)) :
+    fromJS(action.payload.jobs);
+
+  return state
+    .set('loading', false)
+    .set('more', action.payload.more)
+    .set('page', action.payload.page)
+    .set('results', results);
+}
+
 export default function(state=initialState, action) {
   switch (action.type) {
     case MARK_READ:
@@ -30,14 +45,18 @@ export default function(state=initialState, action) {
       return handleUnstar(state, action);
     case FETCH_JOBS.REQUEST:
       return state
+        .set('error', false)
+        .set('more', false)
+        .set('page', 0)
+        .set('results', action.payload.page > 1 ? state.get('results') : fromJS([]))
         .set('loading', true);
     case FETCH_JOBS.SUCCESS:
-      return state
-        .set('loading', false)
-        .set('results', fromJS(action.payload));
+      return handleFetchJobsSuccess(state, action);
     case FETCH_JOBS.FAILURE:
       return state
         .set('loading', false)
+        .set('more', false)
+        .set('page', 0)
         .set('error', true);
 
     default:

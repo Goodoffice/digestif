@@ -11,7 +11,8 @@ export default function(params) {
     method: 'GET',
     types: [
       {
-          type: FETCH_JOBS.REQUEST
+          type: FETCH_JOBS.REQUEST,
+          payload: params
       },
       {
           type: FETCH_JOBS.SUCCESS
