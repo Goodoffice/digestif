@@ -12,7 +12,7 @@ html {
 }
 
 html, body {
-  font-family:  "Roboto", sans-serif;
+  @include neue-haas-grotesk-text;
   font-size: 16px;
 
 }
@@ -24,7 +24,8 @@ body {
 
 
 .container {
-  margin-left: 256px;
+  max-width: 640px;
+  margin: 0 auto;
   position: relative;
 }
 
@@ -41,19 +42,21 @@ body {
 /* ----------------------------------------------------------------- */
 
 h1 {
+  @include neue-haas-grotesk-black;
+  color: #ee0000;
   margin: 0;
-  padding: 1.0em 0.5em 0.5em 0.5em;
+  padding: 1.0em 0 0.5em 0;
   font-size: 24px;
   font-weight: 200;
-  background: black;
 }
 
 h2 {
+  @include neue-haas-grotesk-bold;
   margin-top: 0;
   font-weight: bold;
   text-align: left;
   font-size: 2em;
-  padding: 0 0.5em;
+  padding: 0;
   line-height: 1em;
 }
 
@@ -133,9 +136,7 @@ h2 {
 
 
 .job-list {
-  padding: 1em;
-  max-width: 960px;
-  margin: 0 auto;
+  padding: 1em 0;
 }
 .job-list h2 {
   margin-top: 1em;
@@ -149,4 +150,12 @@ h2 {
 .JobList__Paginator {
   margin: 2em 0 2em 0;
   text-align: center;
+}
+
+.unread {
+  @include neue-haas-grotesk-bold;
+}
+
+.Header__SavedSearches {
+  margin-top: 1em;
 }

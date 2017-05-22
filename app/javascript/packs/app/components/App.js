@@ -4,7 +4,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 import JobList from '../containers/JobList';
-import AppDrawer from './AppDrawer';
+import Header from './Header';
 
 import { Provider } from 'react-redux';
 import { Map } from 'immutable';
@@ -43,12 +43,16 @@ class App extends React.Component {
       super(props);
       this.props.fetchSources();
       this.props.fetchSavedSearches();
+
+      this._onSearch = this.onSearch.bind(this);
     }
     render() {
       return (
         <Router history={history}>
           <div>
-              <AppDrawer {...this.props} />
+              <Header
+                onSearch={this._onSearch}
+                {...this.props} />
 
               <Route path="/starred" component={JobList} />
               <Route path="/search/:query" component={JobList} />
@@ -57,6 +61,13 @@ class App extends React.Component {
           </div>
         </Router>
       );
+    }
+
+    onSearch(query) {
+      this.props.fetchJobs({
+        query: query,
+        page: 1
+      });
     }
 }
 
@@ -102,9 +113,13 @@ const ConnectedApp = connect(
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+const theme = getMuiTheme({
+  fontFamily: 'Neue Haas Grotesk Std Text 55 Roman'
+});
+
 const Wrapper = props => (
   <Provider store={store}>
-    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+    <MuiThemeProvider muiTheme={theme}>
       <ConnectedApp />
     </MuiThemeProvider>
   </Provider>

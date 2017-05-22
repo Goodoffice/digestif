@@ -42,11 +42,11 @@ export default class extends React.Component {
             onTouchTap={this._read}
             style={{color: 'black'}}
             leftAvatar={this.getAvatar()}
-            rightIconButton={<StarIconButton checked={this.props.job.get('starred')} onChange={this._star}/>}
             primaryText={this.getPrimaryText()}
             secondaryText={this.getSecondaryText()} />
       );
   }
+            /*rightIconButton={<StarIconButton checked={this.props.job.get('starred')} onChange={this._star}/>}*/
 
   hasFavicon() {
       return !!this.props.job.get('favicon_url');
@@ -54,7 +54,7 @@ export default class extends React.Component {
 
   getPrimaryText() {
     const text = this.props.job.get('title');
-    return <div style={{fontWeight: this.props.job.get('unread') ? 'bold' : 'normal'}}>{text}</div>;
+    return <div className={this.props.job.get('unread') ? 'unread' : ''}>{text}</div>;
   }
 
   getAvatar() {
