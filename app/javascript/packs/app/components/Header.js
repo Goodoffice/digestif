@@ -44,7 +44,7 @@ class Header extends React.Component {
   render() {
     return (
         <div className="Header">
-            <h1>HackerLeads</h1>
+            <div className="brand">HackerLeads</div>
 
             <TextField
               style={{ width: "100%", fontSize: '1.5em' }}

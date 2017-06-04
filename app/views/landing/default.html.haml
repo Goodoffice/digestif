@@ -1,0 +1,74 @@
+.brand HackerLeads
+
+.content
+  <h1>End job search fatigue.</h1>
+
+  %p
+    You're a technology professional looking for a new gig.
+    Does this daily ritual sound familiar?
+
+  %ol
+    %li Check a job board.
+    %li Click a post you think might be a good fit.
+    %li Tell yourself you'll think about it.
+    %li Close the window and forget about it.
+    %li Repeat.
+
+  %p
+    You know you're readily qualified for plenty of the jobs
+    you find, but know there are probably places you aren't looking.
+    Who has the time to visit dozens of job sites every day?
+
+  %p
+    Securing a new tech job can be a pain. That's why I built
+    <strong>HackerLeads</strong>.
+
+  <h2>What you can do:</h2>
+
+  <h4>Search 30+ of the top tech job sites</h4>
+
+  %p
+    HackerLeads displays job listings from 30 of the top technology
+    job sites, and new sites are added every month.
+
+  <h4>Track your favorite listings so you can apply later</h4>
+
+  %p
+    Click the star icon beside each listing to save the listing to your
+    starred list for later review.
+
+  <h4>See only jobs that are relevant to your skill set</h4>
+
+  %p
+    Saved Searches allow you to quickly view new listings for your
+    skill set.
+
+
+  %h3 Who made it?
+
+  %p
+    I'm <a href="http://www.teejayvanslyke.com">Teejay VanSlyke</a>, a digital
+    product consultant living in Eugene, Oregon.
+
+  %p
+    I built HackerLeads because I wanted a way to quickly see the latest
+    jobs across the web from multiple sources. It helps me get a feel for the
+    state of the technology job marketplace and to identify prospective clients.
+
+  %p
+    Now I figure I'll pass that value onto you.
+
+
+  %h3 Get free exclusive access.
+
+  %p
+    For a limited time, enjoy free access to all HackerLeads has to offer:
+
+  = form_for(@user, as: 'user', url: user_registration_path) do |f|
+    .form-field
+      = f.email_field :email, placeholder: "Enter your email address"
+    .form-field
+      = f.password_field :password, placeholder: "Enter a password"
+    .buttons
+      %input.btn.primary{type: 'submit', value: 'Search tech jobs'}/
+

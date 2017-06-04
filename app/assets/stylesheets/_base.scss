@@ -1,32 +1,279 @@
 @import 'compass';
+@import 'sass-material-colors';
+@import 'neue_haas_grotesk';
 
-$primary:   #0F4696;
+/* ----------------------------------------------------------------- */
+// Functions
+/* ----------------------------------------------------------------- */
 
-$primary-hue: hue($primary);
-$base-saturation: 3;
-$accent-saturation: 80;
-$accent-lightness: 45;
+@function color($key) {
+  @return map-get($colors, $key);
+}
+@function mc($color, $shade) {
+  @return adjust-hue(material-color($color, $shade), 0%);
+}
 
-/*
- * Lightness values were extracted from:
- * http://ethanschoonover.com/solarized
- */
+/* ----------------------------------------------------------------- */
+// Mixins
+/* ----------------------------------------------------------------- */
 
-$base03:   black;
-$base02:    hsl($primary-hue, $base-saturation, 30);
-$base01:    hsl($primary-hue, $base-saturation, 45);
-$base00:    hsl($primary-hue, $base-saturation, 50);
-$base0:    hsl($primary-hue, $base-saturation, 60);
-$base1:    hsl($primary-hue, $base-saturation, 85);
-$base2:    hsl(255 - $primary-hue, $base-saturation, 96);
-$base3:    white;
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
 
-$accent03:    hsl($primary-hue + 45, $accent-saturation, $accent-lightness);
-$accent02:    hsl($primary-hue + 90, $accent-saturation, $accent-lightness);
-$accent01:    hsl($primary-hue + 135, $accent-saturation, $accent-lightness);
-$accent00:    hsl($primary-hue + 180, $accent-saturation, $accent-lightness);
-$accent0:    hsl($primary-hue + 215, $accent-saturation, $accent-lightness);
-$accent1:    hsl($primary-hue + 270, $accent-saturation, $accent-lightness);
-$accent2:    hsl($primary-hue - 315, $accent-saturation, $accent-lightness);
-$accent3:    hsl($primary-hue - 360, $accent-saturation, $accent-lightness);
+// Using media queries with like this:
+// @include media-query($on-palm) {
+//     .wrapper {
+//         padding-right: $spacing-unit / 2;
+//         padding-left: $spacing-unit / 2;
+//     }
+// }
+@mixin media-query($device) {
+    @media screen and (min-width: $device) {
+        @content;
+    }
+}
+@mixin vertical-media-query($device) {
+    @media screen and (min-height: $device) {
+        @content;
+    }
+}
+
+@mixin vertical-align-center {
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+}
+
+/* ----------------------------------------------------------------- */
+// Colors
+/* ----------------------------------------------------------------- */
+
+$colors: (
+  primary: #0029EB,
+  background: white,
+  link: #0029EB,
+  brand: #EB0000
+);
+
+
+/* ----------------------------------------------------------------- */
+// HTML & Body
+/* ----------------------------------------------------------------- */
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+html, body {
+  font: 20px "adobe-caslon-pro", Georgia,Cambria,"Times New Roman",Times,serif;
+  color: black;
+  background: white;
+
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ----------------------------------------------------------------- */
+// Paragraphs
+/* ----------------------------------------------------------------- */
+.align-right {
+  text-align: right;
+}
+.pull-right {
+  float: right;
+}
+
+a {
+  color: color('link');
+  &:hover {
+    transition: color 0.25s ease-in-out;
+    color: black;
+  }
+}
+
+p,li {
+  margin-top: 0;
+  line-height:1.45em;
+  margin-bottom: 0;
+}
+
+p { margin: 0; }
+p + p { margin-top: 1em; }
+
+ol {
+  padding: 0;
+  padding-left: 2em;
+}
+li {
+  margin: 0;
+}
+img {
+  max-width: 100%;
+  margin-bottom: 1em;
+}
+
+
+/* ----------------------------------------------------------------- */
+// Headings
+/* ----------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Neue Haas Grotesk Std Display 95 Black';
+  line-height: 1em;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  padding-top: 0.236em;
+  margin-bottom: 0.456em;
+  * + & {
+    margin-top: 1.931em;
+  }
+}
+
+
+h1 a {
+  text-decoration: none;
+  color: black;
+}
+
+h1 { font-size: 2.083em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.389em; }
+h4 { font-size: 1em; }
+
+
+.clearfix {
+  clear: both;
+}
+
+
+.brand {
+  background: white;
+  top: 0;
+  padding-top: 1em;
+  padding-bottom: 2em;
+  display: block;
+  text-decoration: none;
+  font-family: 'Neue Haas Grotesk Std Display 95 Black';
+  font-weight: normal;
+  color: color('brand');
+  font-size: 1em;
+  &:hover {
+    color: color('brand');
+  }
+}
+
+/* ----------------------------------------------------------------- */
+// Forms
+/* ----------------------------------------------------------------- */
+
+form {
+  margin: 1em 0;
+}
+
+.form-field {
+  margin: 1em 0;
+}
+
+.form-field label {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 0.236em;
+  font-family: 'Neue Haas Grotesk Std Text 75 Bold';
+}
+
+.indicates-required, .asterisk {
+  font-size: 12px;
+  font-family: 'Neue Haas Grotesk Std Text 75 Bold';
+  color: mc('grey', '500');
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+textarea {
+  font-size: 0.738em;
+  @include neue-haas-grotesk-bold;
+  padding: 0.738em;
+  border-width: 0;
+  border-radius: 0;
+  resize: none;
+  line-height: 1em;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  border: 0.236em solid black;
+  &:focus {
+    outline: none;
+  }
+  @include placeholder {
+    color: mc('grey', '600');
+  }
+}
+textarea {
+  height: 10em;
+  line-height: 1.45em;
+}
+
+input[type='submit'] {
+  border-width: 0;
+  &:focus {
+    outline: none;
+  }
+}
+
+form .buttons {
+  clear: both;
+  margin: 1em 0;
+}
+
+.form-field--inline {
+  input, label {
+    display: inline-block;
+  }
+}
+.inline-form-field {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+
+/* ----------------------------------------------------------------- */
+// Buttons
+/* ----------------------------------------------------------------- */
+
+input[type='email'], input[type='text'], input[type='submit'], textarea {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+
+.btn {
+  font-size: 0.738em;
+  cursor: pointer;
+  padding: 0.738em;
+  text-decoration: none;
+  display: inline-block;
+  background-color: mc('grey', '700');
+  color: white;
+  @include neue-haas-grotesk-bold;
+  border-radius: 0;
+  box-sizing: border-box;
+  border-width: 0;
+  --webkit-appearance: none;
+}
+
+.btn.primary {
+  background-color: color('primary');
+  color: white;
+}
 

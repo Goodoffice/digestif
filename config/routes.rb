@@ -5,6 +5,17 @@ Rails.application.routes.draw do
   devise_for :users
   get 'digests/show'
 
+  devise_scope :user do
+    authenticated :user do
+      root to: 'site#show'
+    end
+
+    unauthenticated :user do
+      root to: 'landing#default'
+    end
+  end
+
+
   mount HackerJobs::MailPreview => 'mail_preview'
 
   post 'api/source_lists' => 'api/source_lists#create'
@@ -23,6 +34,4 @@ Rails.application.routes.draw do
   get '/jobs/:id' => 'jobs#show'
 
   get '/*url' => 'site#show', constraints: { format: :html }
-
-  root 'site#show'
 end

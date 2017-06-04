@@ -15,6 +15,7 @@ gem 'webpacker', github: 'rails/webpacker'
 gem 'erubis'
 gem 'rails_admin', '~> 1.1.1'
 gem 'dotenv-rails'
+gem 'sass-material-colors'
 
 gem 'kaminari'
 gem 'wombat'
