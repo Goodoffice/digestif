@@ -20,7 +20,7 @@ class API::JobsController < API::BaseController
   def filtered_entries
     if params[:starred] == 'true'
       current_user.entries
-    elsif params[:query].present?
+    elsif params[:query]
       Entry.search_for(params[:query])
     else
       Entry.all

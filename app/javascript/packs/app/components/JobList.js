@@ -14,6 +14,17 @@ export default class extends React.Component {
     this._handleViewMore = this.handleViewMore.bind(this);
   }
 
+  getTitle() {
+    if (this.props.match.params.query) {
+      return capitalize(this.props.match.params.query) + " Leads";
+    }
+    else if (this.isStarred()) {
+      return "Starred";
+    }
+
+    return "All Jobs";
+  }
+
   isStarred() {
     return this.props.match.path === '/starred';
   }
@@ -48,6 +59,7 @@ export default class extends React.Component {
   render() {
     return (
         <div className="job-list">
+          <h2>{this.getTitle()}</h2>
           <List>
               {this.renderItems()}
           </List>

@@ -1,15 +1,56 @@
 @import 'base';
 @import 'partials/**/*';
 
+/* ----------------------------------------------------------------- */
+// HTML & Body
+/* ----------------------------------------------------------------- */
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+html, body {
+  @include neue-haas-grotesk-text;
+  font-size: 16px;
+
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
 .container {
-  max-width: 640px;
-  margin: 0 auto;
+  margin-left: 256px;
   position: relative;
 }
 
 #app {
   padding: 2em;
-  @include neue-haas-grotesk-text;
+}
+
+/* ----------------------------------------------------------------- */
+// Headers
+/* ----------------------------------------------------------------- */
+
+h1 {
+  margin: 0;
+  padding: 1.0em 0.5em 0.5em 0.5em;
+  font-size: 24px;
+  font-weight: 200;
+  background: black;
+}
+
+h2 {
+  margin-top: 0;
+  font-weight: bold;
+  text-align: left;
+  font-size: 2em;
+  padding: 0 0.5em;
+  line-height: 1em;
 }
 
 /* ----------------------------------------------------------------- */
@@ -22,7 +63,9 @@
 
 
 .job-list {
-  padding: 1em 0;
+  padding: 1em;
+  max-width: 960px;
+  margin: 0 auto;
 }
 .job-list h2 {
   margin-top: 1em;
@@ -36,12 +79,4 @@
 .JobList__Paginator {
   margin: 2em 0 2em 0;
   text-align: center;
-}
-
-.unread {
-  @include neue-haas-grotesk-bold;
-}
-
-.Header__SavedSearches {
-  margin-top: 1em;
 }
