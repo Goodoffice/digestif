@@ -1,0 +1,25 @@
+@import 'sass-material-colors';
+
+input[type='email'], input[type='text'], input[type='submit'], textarea {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+
+.btn {
+  font-size: 0.738em;
+  cursor: pointer;
+  padding: 0.738em;
+  text-decoration: none;
+  display: inline-block;
+  background-color: mc('grey', '700');
+  color: white;
+  @include neue-haas-grotesk-bold;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+.btn.primary {
+  background-color: color('primary');
+  color: white;
+}
+

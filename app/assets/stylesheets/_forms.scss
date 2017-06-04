@@ -1,0 +1,72 @@
+@import 'sass-material-colors';
+
+form {
+  margin: 1em 0;
+}
+
+.form-field {
+  margin: 1em 0;
+}
+
+.form-field label {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 0.236em;
+  font-family: 'Neue Haas Grotesk Std Text 75 Bold';
+}
+
+.indicates-required, .asterisk {
+  font-size: 12px;
+  font-family: 'Neue Haas Grotesk Std Text 75 Bold';
+  color: mc('grey', '500');
+}
+
+input[type='text'],
+input[type='email'],
+textarea {
+  font-size: 0.738em;
+  @include neue-haas-grotesk-bold;
+  padding: 0.738em;
+  border-width: 0;
+  border-radius: 0;
+  resize: none;
+  line-height: 1em;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  border: 0.236em solid black;
+  &:focus {
+    outline: none;
+  }
+  @include placeholder {
+    color: mc('grey', '600');
+  }
+}
+textarea {
+  height: 10em;
+  line-height: 1.45em;
+}
+
+input[type='submit'] {
+  border-width: 0;
+  &:focus {
+    outline: none;
+  }
+}
+
+form .buttons {
+  clear: both;
+  margin: 1em 0;
+}
+
+.form-field--inline {
+  input, label {
+    display: inline-block;
+  }
+}
+.inline-form-field {
+  display: inline-block;
+  margin-right: 1em;
+}
+
