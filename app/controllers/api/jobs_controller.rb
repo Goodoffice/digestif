@@ -10,6 +10,7 @@ class API::JobsController < API::BaseController
       json: {
         jobs: serialized_entries,
         page: page,
+        query: params[:query],
         more: more?
       }
     )

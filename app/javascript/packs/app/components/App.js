@@ -102,9 +102,16 @@ const ConnectedApp = connect(
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: '#0029EB',
+    accent1Color: '#eb0000'
+  }
+});
+
 const Wrapper = props => (
   <Provider store={store}>
-    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+    <MuiThemeProvider muiTheme={muiTheme}>
       <ConnectedApp />
     </MuiThemeProvider>
   </Provider>

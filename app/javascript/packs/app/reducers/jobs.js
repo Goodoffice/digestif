@@ -10,6 +10,7 @@ const initialState = fromJS({
     more: false,
     page: 0,
     loading: true,
+    query: null,
     error: false
 });
 
@@ -48,6 +49,7 @@ export default function(state=initialState, action) {
         .set('error', false)
         .set('more', false)
         .set('page', 0)
+        .set('query', action.payload.query)
         .set('results', action.payload.page > 1 ? state.get('results') : fromJS([]))
         .set('loading', true);
     case FETCH_JOBS.SUCCESS:

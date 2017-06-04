@@ -12,7 +12,7 @@ export default function(params) {
     types: [
       {
           type: FETCH_JOBS.REQUEST,
-          payload: params
+          payload: Object.assign({}, params, { q: params.query })
       },
       {
           type: FETCH_JOBS.SUCCESS

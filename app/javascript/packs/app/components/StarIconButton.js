@@ -5,7 +5,7 @@ import StarIcon from 'material-ui/svg-icons/toggle/star';
 
 const renderIcon = checked => {
   if (checked) {
-    return <StarIcon color='black' />
+    return <StarIcon color='ecb400' />
   }
   else {
     return <StarBorderIcon color='black' />

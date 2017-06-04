@@ -14,9 +14,13 @@ export default class extends React.Component {
     this._handleViewMore = this.handleViewMore.bind(this);
   }
 
+  getQuery() {
+    return this.props.jobs.get('query') || this.props.match.params.query;
+  }
+
   getTitle() {
-    if (this.props.match.params.query) {
-      return capitalize(this.props.match.params.query) + " Leads";
+    if (this.getQuery()) {
+      return capitalize(this.getQuery()) + " Leads";
     }
     else if (this.isStarred()) {
       return "Starred";

@@ -10,11 +10,12 @@ import StarIconButton from './StarIconButton';
 import { blue500, red500, green500, purple500, yellow500, black, white } from 'material-ui/styles/colors';
 
 const THEMES = [
-    { backgroundColor: blue500, color: white },
-    { backgroundColor: red500, color: white },
-    { backgroundColor: green500, color: white },
-    { backgroundColor: purple500, color: white },
-    { backgroundColor: yellow500, color: black }
+    { backgroundColor: '#ed5900', color: white },
+    { backgroundColor: '#EB0000', color: white },
+    { backgroundColor: '#c8ed00', color: black },
+    { backgroundColor: '#00EB71', color: black },
+    { backgroundColor: '#2adcec', color: black },
+    { backgroundColor: '#d800ee', color: white},
 ];
 
 

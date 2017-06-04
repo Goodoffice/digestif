@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { capitalize } from 'lodash';
+import { debounce, capitalize } from 'lodash';
 import {
     Link
 } from 'react-router-dom';
@@ -10,6 +10,7 @@ import Paper from 'material-ui/Paper';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 import RssFeedIcon from 'material-ui/svg-icons/communication/rss-feed';
 import AddCircleOutlineIcon from 'material-ui/svg-icons/content/add-circle-outline';
@@ -32,6 +33,8 @@ class AppDrawer extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this._onSearch = debounce(this.onSearch.bind(this), 500);
   }
 
   renderSavedSearches() {
@@ -53,7 +56,12 @@ class AppDrawer extends React.Component {
     return (
         <Drawer
           open={this.props.open}>
-            <h1>Hacker Leads</h1>
+            <div className="brand">Hacker Leads</div>
+
+            <TextField
+              style={{ width: "100%", paddingLeft: '1em' }}
+              onChange={this._onSearch}
+              placeholder="Search" />
 
             <Menu
               value={this.props.router.get('location').get('pathname')}>
@@ -77,6 +85,13 @@ class AppDrawer extends React.Component {
 
         </Drawer>
     );
+  }
+
+  onSearch(query) {
+    this.props.fetchJobs({
+      query: query,
+      page: 1
+    });
   }
 
   handleTouchTapSource(source) {
