@@ -29,6 +29,10 @@ const LinkedMenuItem = props => (
   </MenuItem>
 );
 
+const selectedMenuItemStyle = {
+  fontWeight: 'bold'
+};
+
 class AppDrawer extends React.Component {
 
   constructor(props) {
@@ -64,6 +68,7 @@ class AppDrawer extends React.Component {
               placeholder="Search" />
 
             <Menu
+              selectedMenuItemStyle={selectedMenuItemStyle}
               value={this.props.router.get('location').get('pathname')}>
 
               <MenuItem
