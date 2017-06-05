@@ -65,7 +65,7 @@ class AppDrawer extends React.Component {
               <UserMenu
                 signOut={this.props.signOut} />
             </div>
-            <div className="brand">Hacker Leads</div>
+            <div className="AppDrawer__Brand brand">Hacker Leads</div>
 
             <TextField
               style={{ width: "100%", paddingLeft: '1em' }}

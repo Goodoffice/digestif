@@ -33,5 +33,5 @@ Rails.application.routes.draw do
 
   get '/jobs/:id' => 'jobs#show'
 
-  get '/*url' => 'site#show', constraints: { format: :html }
+  get '/*url' => 'app#show', constraints: { format: :html }
 end
