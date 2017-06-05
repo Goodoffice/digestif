@@ -97,7 +97,15 @@ export default class extends React.Component {
     }
   }
 
+  hasLoadedItems() {
+    return this.props.jobs.get('results').toJS().length > 0
+  }
+  isEmpty() {
+    return !this.props.jobs.get('loading');
+  }
+
   renderItems() {
+    if (this.hasLoadedItems()) {
       return this.props.jobs.get('results').map(entry => (
           <JobListItem
             markRead={this.props.markRead}
@@ -105,5 +113,13 @@ export default class extends React.Component {
             key={entry.get('id')}
             job={entry} />
       ));
+    }
+    else if (this.isEmpty()) {
+      return (
+        <div className="JobList__Empty">
+          No leads today, boss.
+        </div>
+      );
+    }
   }
 }
