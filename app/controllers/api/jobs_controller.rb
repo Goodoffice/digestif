@@ -34,7 +34,7 @@ class API::JobsController < API::BaseController
 
   def serialized_entries
     ActiveModel::Serializer::CollectionSerializer.new(
-      @entries.page(page),
+      @entries.page(page).per(50),
       each_serializer: EntrySerializer,
       scope: current_user
     ).as_json(root: false)
