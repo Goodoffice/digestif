@@ -70,7 +70,10 @@
     .form-field
       = f.password_field :password, placeholder: "Enter a password"
     .buttons
+      .pull-right
+        = link_to "Already have an account? Sign in", new_user_session_path
       %input.btn.primary{type: 'submit', value: 'Get access to tech job leads'}/
+
 
 .footer
   Made in Oregon by <a href="http://www.teejayvanslyke.com">Teejay VanSlyke</a>
