@@ -14,6 +14,10 @@ form {
   margin-bottom: 0.236em;
   font-family: 'Neue Haas Grotesk Std Text 75 Bold';
 }
+.form-field--inline input,
+.form-field--inline label {
+  display: inline-block;
+}
 
 .indicates-required, .asterisk {
   font-size: 12px;
