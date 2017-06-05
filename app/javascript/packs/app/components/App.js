@@ -45,6 +45,7 @@ class App extends React.Component {
       this.props.fetchSavedSearches();
     }
     render() {
+      console.log(this.props);
       return (
         <Router history={history}>
           <div>
@@ -67,6 +68,7 @@ import fetchSources from '../actions/fetchSources';
 import fetchSavedSearches from '../actions/fetchSavedSearches';
 import createSource from '../actions/createSource';
 import createSavedSearch from '../actions/createSavedSearch';
+import signOut from '../actions/signOut';
 import {
   openAddSavedSearchDialog,
   closeAddSavedSearchDialog
@@ -90,7 +92,8 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
       createSource: (attributes) => dispatch(createSource(attributes)),
       createSavedSearch: (attributes) => dispatch(createSavedSearch(attributes)),
       openAddSavedSearchDialog: () => dispatch(openAddSavedSearchDialog()),
-      closeAddSavedSearchDialog: () => dispatch(closeAddSavedSearchDialog())
+      closeAddSavedSearchDialog: () => dispatch(closeAddSavedSearchDialog()),
+      signOut: () => dispatch(signOut())
   }
 }
 

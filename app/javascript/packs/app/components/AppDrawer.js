@@ -62,7 +62,8 @@ class AppDrawer extends React.Component {
         <Drawer
           open={this.props.open}>
             <div className="pull-right">
-              <UserMenu />
+              <UserMenu
+                signOut={this.props.signOut} />
             </div>
             <div className="brand">Hacker Leads</div>
 
