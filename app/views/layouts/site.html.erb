@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HackerLeads: Search 30+ tech job sites</title>
+    <title>Hacker Jobs</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+    <script src="https://use.typekit.net/jkh5unb.js"></script>
+    <script>try{Typekit.load({ async: false });}catch(e){}</script>
+  </head>
+	<body class="site <%= body_class %>">
+    <div class="container">
+      <div class="brand">HackerLeads</div>
+      <div class="content">
+        <%= yield %>
+      </div>
+      <div class="footer">
+        Made in Oregon by <a href="http://www.teejayvanslyke.com">Teejay VanSlyke</a>
+      </div>
+    </div>
+  </body>
+</html>

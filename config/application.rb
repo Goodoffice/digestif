@@ -24,5 +24,10 @@ module Digestif
     config.assets.precompile << "email.css"
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
+    config.to_prepare do
+      Devise::SessionsController.layout "site"
+      Devise::PasswordsController.layout "site"
+    end
   end
 end
