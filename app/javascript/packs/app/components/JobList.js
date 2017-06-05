@@ -1,8 +1,7 @@
 import React from 'react';
 import {List} from 'material-ui/List';
-import CircularProgress from 'material-ui/CircularProgress';
-import RaisedButton from 'material-ui/RaisedButton';
 import JobListItem from './JobListItem';
+import JobListPaginator from './JobListPaginator';
 import { capitalize } from 'lodash';
 
 export default class extends React.Component {
@@ -10,8 +9,7 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.fetchJobs(this.props.match.params.query, 1);
-
-    this._handleViewMore = this.handleViewMore.bind(this);
+    this._fetchJobs = this.fetchJobs.bind(this);
   }
 
   getQuery() {
@@ -52,14 +50,6 @@ export default class extends React.Component {
     });
   }
 
-  renderProgress() {
-    if (this.isLoading()) {
-      return (
-        <CircularProgress />
-      );
-    }
-  }
-
   render() {
     return (
         <div className="job-list">
@@ -68,34 +58,14 @@ export default class extends React.Component {
               {this.renderItems()}
           </List>
 
-          {this.renderPaginator()}
+          <JobListPaginator
+            query={this.props.match.params.query}
+            fetchJobs={this._fetchJobs}
+            jobs={this.props.jobs} />
         </div>
     );
   }
 
-  isLoading() {
-      return (this.props.jobs.get('loading'));
-  }
-
-  handleViewMore() {
-    const { match, jobs } = this.props;
-    this.fetchJobs(match.params.query, jobs.get('page') + 1);
-  }
-
-  renderPaginator() {
-    return (
-      <div className="JobList__Paginator">
-        {this.renderProgress()}
-        {this.renderViewMoreButton()}
-      </div>
-    );
-  }
-
-  renderViewMoreButton() {
-    if (this.props.jobs.get('more')) {
-        return <RaisedButton label="View More" onTouchTap={this._handleViewMore} />
-    }
-  }
 
   hasLoadedItems() {
     return this.props.jobs.get('results').toJS().length > 0
