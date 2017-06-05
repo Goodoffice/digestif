@@ -60,6 +60,7 @@ class AppDrawer extends React.Component {
   render() {
     return (
         <Drawer
+          containerStyle={{boxShadow: 'none', borderRight: '1px solid #EEEEEE'}}
           open={this.props.open}>
             <div className="pull-right">
               <UserMenu
