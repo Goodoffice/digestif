@@ -17,6 +17,7 @@ import AddCircleOutlineIcon from 'material-ui/svg-icons/content/add-circle-outli
 import LanguageIcon from 'material-ui/svg-icons/action/language';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 
+import UserMenu from './UserMenu';
 import AddSourceDialog from './AddSourceDialog';
 import AddSavedSearchDialog from './AddSavedSearchDialog';
 
@@ -60,6 +61,9 @@ class AppDrawer extends React.Component {
     return (
         <Drawer
           open={this.props.open}>
+            <div className="pull-right">
+              <UserMenu />
+            </div>
             <div className="brand">Hacker Leads</div>
 
             <TextField
