@@ -42,7 +42,6 @@ export default class extends React.Component {
           <ListItem
             onTouchTap={this._read}
             style={{color: 'black'}}
-            leftAvatar={this.getAvatar()}
             rightIconButton={<StarIconButton checked={this.props.job.get('starred')} onChange={this._star}/>}
             primaryText={this.getPrimaryText()}
             secondaryText={this.getSecondaryText()} />

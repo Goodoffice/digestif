@@ -18,11 +18,18 @@ const onChange = props => {
   };
 }
 
+const style = {
+  padding: 0,
+  width: 'auto',
+  height: 'auto',
+  float: 'right'
+}
+
 const StarIconButton = props => (
   <IconButton
     touch={true}
     onTouchTap={props.onChange}
-    style={{float: 'right'}}>
+    style={style}>
     {renderIcon(props.checked)}
   </IconButton>
 );
